@@ -13,7 +13,7 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     line-height: 1.6;
     color: var(--dark-gray);
-    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+    background: linear-gradient(135deg, #0b3d2e 0%, #198754 100%);
     min-height: 100vh;
 }
 
@@ -132,7 +132,7 @@ footer h5 {
 
 /* Loading animation */
 main {
-    background-color: rgba(255, 255, 255, 0.95);
+    background-color: rgba(230, 255, 230, 0.95);
     border-radius: 10px;
     margin: 20px 0;
     padding: 20px;

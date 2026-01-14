@@ -14,6 +14,14 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
 
+@app.context_processor
+def inject_user():
+    user = None
+    user_id = session.get('user_id')
+    if user_id is not None:
+        user = User.query.get(user_id)
+    return {'user': user}
+
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(80), unique=True, nullable=False)
