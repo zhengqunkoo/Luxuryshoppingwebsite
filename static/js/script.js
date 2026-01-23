@@ -218,3 +218,119 @@ const fadeObserver = new IntersectionObserver((entries) => {
 document.querySelectorAll('.product-card, .card').forEach(el => {
     fadeObserver.observe(el);
 });
+
+// AI Advisor Chat Widget
+document.addEventListener('DOMContentLoaded', function() {
+    const chatToggle = document.getElementById('chat-toggle');
+    const chatWindow = document.getElementById('chat-window');
+    const chatClose = document.getElementById('chat-close');
+    const chatInput = document.getElementById('chat-input');
+    const chatSend = document.getElementById('chat-send');
+    const chatMessages = document.getElementById('chat-messages');
+
+    if (!chatToggle) return; // Only run if widget exists
+
+    function toggleChat() {
+        if (chatWindow.style.display === 'none' || chatWindow.style.display === '') {
+            chatWindow.style.display = 'flex';
+            chatInput.focus();
+        } else {
+            chatWindow.style.display = 'none';
+        }
+    }
+
+    if (chatToggle) chatToggle.addEventListener('click', toggleChat);
+    if (chatClose) chatClose.addEventListener('click', toggleChat);
+
+    function addMessage(text, type) {
+        const div = document.createElement('div');
+        div.className = `message ${type}`;
+        div.textContent = text;
+        chatMessages.appendChild(div);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    async function sendMessage() {
+        const text = chatInput.value.trim();
+        if (!text) return;
+
+        // Dev Mode: Allow setting API key locally and detect provider
+        if (text.startsWith('/apikey ')) {
+            const key = text.substring(8).trim();
+            if (key) {
+                // Determine provider based on key format
+                let provider = 'openai';
+                if (key.startsWith('AIza')) {
+                    provider = 'gemini';
+                }
+                
+                localStorage.setItem('local_dev_key', key);
+                localStorage.setItem('local_dev_provider', provider);
+                addMessage(`System: Dev API Key saved for ${provider.toUpperCase()}.`, 'ai');
+            }
+            chatInput.value = '';
+            return;
+        }
+        if (text === '/clearkey') {
+            localStorage.removeItem('local_dev_key');
+            localStorage.removeItem('local_dev_provider');
+            localStorage.removeItem('openai_dev_key'); // Cleanup old key
+            addMessage('System: Dev API Keys removed.', 'ai');
+            chatInput.value = '';
+            return;
+        }
+
+        addMessage(text, 'user');
+        chatInput.value = '';
+        chatInput.disabled = true;
+
+        // Add loading spinner
+        const spinner = document.createElement('div');
+        spinner.className = 'spinner';
+        spinner.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Thinking...';
+        chatMessages.appendChild(spinner);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+
+        try {
+            // Check new key storage first, fallback to old key name if exists
+            const devKey = localStorage.getItem('local_dev_key') || localStorage.getItem('openai_dev_key');
+            const devProvider = localStorage.getItem('local_dev_provider'); // Might be null
+            
+            const response = await fetch('/api/ask_advisor', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ 
+                    question: text,
+                    api_key: devKey,
+                    provider: devProvider
+                })
+            });
+
+            spinner.remove();
+            
+            const data = await response.json();
+            
+            if (data.error) {
+                 addMessage('Error: ' + data.error, 'ai');
+            } else {
+                addMessage(data.answer, 'ai');
+            }
+
+        } catch (error) {
+            spinner.remove();
+            addMessage('Sorry, I encountered an error connecting to the server.', 'ai');
+        } finally {
+            chatInput.disabled = false;
+            chatInput.focus();
+        }
+    }
+
+    if (chatSend) {
+        chatSend.addEventListener('click', sendMessage);
+        chatInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') sendMessage();
+        });
+    }
+});

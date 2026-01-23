@@ -6,6 +6,9 @@ from wtforms.validators import InputRequired, Length, ValidationError, NumberRan
 from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime
 import os
+import openai
+from google import genai
+from wtforms import StringField, PasswordField, SubmitField, FloatField, TextAreaField, IntegerField, SelectField
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'luxury_shopping_secret_key_2024'
@@ -77,6 +80,11 @@ class OrderItem(db.Model):
     order = db.relationship('Order', backref=db.backref('items', lazy=True))
     product = db.relationship('Product', backref=db.backref('order_items', lazy=True))
 
+class SiteSetting(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    key = db.Column(db.String(50), unique=True, nullable=False)
+    value = db.Column(db.Text, nullable=True)
+
 class LoginForm(FlaskForm):
     username = StringField('Username', validators=[InputRequired(), Length(min=4, max=20)])
     password = PasswordField('Password', validators=[InputRequired(), Length(min=6, max=20)])
@@ -96,6 +104,12 @@ class ProductForm(FlaskForm):
     stock = IntegerField('Stock', validators=[InputRequired(), NumberRange(min=0)])
     image_url = StringField('Image URL', validators=[Length(max=200)])
     submit = SubmitField('Add Product')
+
+class ConfigForm(FlaskForm):
+    ai_provider = SelectField('AI Provider', choices=[('openai', 'OpenAI'), ('gemini', 'Google Gemini')], default='openai')
+    openai_api_key = StringField('OpenAI API Key', validators=[Length(max=200)])
+    gemini_api_key = StringField('Gemini API Key', validators=[Length(max=200)])
+    submit = SubmitField('Save Settings')
 
 @app.route('/')
 def index():
@@ -248,7 +262,7 @@ def orders():
     user_orders = Order.query.filter_by(user_id=session['user_id']).order_by(Order.created_at.desc()).all()
     return render_template('orders.html', orders=user_orders)
 
-@app.route('/admin')
+@app.route('/admin', methods=['GET', 'POST'])
 def admin():
     if 'user_id' not in session:
         return redirect(url_for('login'))
@@ -260,7 +274,49 @@ def admin():
     
     products = Product.query.all()
     orders = Order.query.all()
-    return render_template('admin.html', products=products, orders=orders)
+    
+    # Handle Settings
+    form = ConfigForm()
+    if form.validate_on_submit():
+        # Save provider
+        provider_setting = SiteSetting.query.filter_by(key='ai_provider').first()
+        if not provider_setting:
+            provider_setting = SiteSetting(key='ai_provider')
+            db.session.add(provider_setting)
+        provider_setting.value = form.ai_provider.data
+        
+        # Save OpenAI Key
+        openai_key_setting = SiteSetting.query.filter_by(key='openai_api_key').first()
+        if not openai_key_setting:
+            openai_key_setting = SiteSetting(key='openai_api_key')
+            db.session.add(openai_key_setting)
+        openai_key_setting.value = form.openai_api_key.data
+
+        # Save Gemini Key
+        gemini_key_setting = SiteSetting.query.filter_by(key='gemini_api_key').first()
+        if not gemini_key_setting:
+            gemini_key_setting = SiteSetting(key='gemini_api_key')
+            db.session.add(gemini_key_setting)
+        gemini_key_setting.value = form.gemini_api_key.data
+        
+        db.session.commit()
+        flash('Settings updated successfully', 'success')
+        return redirect(url_for('admin'))
+    
+    # Pre-populate form
+    provider_setting = SiteSetting.query.filter_by(key='ai_provider').first()
+    if provider_setting:
+        form.ai_provider.data = provider_setting.value
+        
+    openai_key_setting = SiteSetting.query.filter_by(key='openai_api_key').first()
+    if openai_key_setting:
+        form.openai_api_key.data = openai_key_setting.value
+
+    gemini_key_setting = SiteSetting.query.filter_by(key='gemini_api_key').first()
+    if gemini_key_setting:
+        form.gemini_api_key.data = gemini_key_setting.value
+        
+    return render_template('admin.html', products=products, orders=orders, form=form)
 
 @app.route('/admin/add_product', methods=['GET', 'POST'])
 def add_product():
@@ -288,6 +344,82 @@ def add_product():
         return redirect(url_for('admin'))
     
     return render_template('add_product.html', form=form)
+
+@app.route('/api/ask_advisor', methods=['POST'])
+def ask_advisor():
+    data = request.json
+    user_question = data.get('question')
+    client_api_key = data.get('api_key')
+    client_provider = data.get('provider')
+    
+    if not user_question:
+        return jsonify({'error': 'No question provided'}), 400
+        
+    # Get Provider (Client override or DB default)
+    if app.debug and client_provider:
+        provider = client_provider
+    else:
+        provider_setting = SiteSetting.query.filter_by(key='ai_provider').first()
+        provider = provider_setting.value if provider_setting else 'openai'
+
+    # Determine API Key: Client (Dev) > DB (Prod)
+    final_api_key = None
+    
+    if app.debug and client_api_key:
+        final_api_key = client_api_key
+    else:
+        # Fetch from DB based on provider
+        if provider == 'gemini':
+            key_setting = SiteSetting.query.filter_by(key='gemini_api_key').first()
+        else:
+            key_setting = SiteSetting.query.filter_by(key='openai_api_key').first()
+            
+        final_api_key = key_setting.value if key_setting else None
+    
+    if not final_api_key:
+        return jsonify({'error': f'{provider.title()} Service not configured'}), 503
+        
+    try:
+        # RAG: Retrieve all products
+        products = Product.query.all()
+        product_context = "\n".join([f"- {p.name}: ${p.price}. {p.description} (Category: {p.category})" for p in products])
+        
+        system_prompt = (
+            "You are 'Lux', a sophisticated, polite, and helpful AI Advisor for a Luxury Shopping Website. "
+            "Your persona is professional yet warm, embodying the elegance of the brand. "
+            "You have access to the following product catalog:\n\n"
+            f"{product_context}\n\n"
+            "Answer the customer's question based on this catalog. "
+            "Recommend products if they fit the user's needs. "
+            "If the user asks about something not in the catalog, politely steer them back to our offerings. "
+            "Keep your answers concise (under 150 words) unless detailed product info is requested."
+        )
+
+        answer = ""
+        
+        if provider == 'gemini':
+            client = genai.Client(api_key=final_api_key)
+            # Feed system prompt as first message effectively
+            full_prompt = f"{system_prompt}\n\nUser Question: {user_question}"
+            response = client.models.generate_content(
+                model='gemini-3-pro-preview',
+                contents=full_prompt
+            )
+            answer = response.text
+        else:
+            client = openai.OpenAI(api_key=final_api_key)
+            response = client.chat.completions.create(
+                model="gpt-3.5-turbo",
+                messages=[
+                    {"role": "system", "content": system_prompt},
+                    {"role": "user", "content": user_question}
+                ]
+            )
+            answer = response.choices[0].message.content
+            
+        return jsonify({'answer': answer})
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
 
 if __name__ == '__main__':
     with app.app_context():
