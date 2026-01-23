@@ -28,18 +28,23 @@ document.addEventListener('DOMContentLoaded', function() {
     const addToCartButtons = document.querySelectorAll('form[action*="add_to_cart"] button');
     addToCartButtons.forEach(button => {
         button.addEventListener('click', function(e) {
-            if (!this.disabled) {
-                // Add loading state
-                const originalText = this.innerHTML;
-                this.innerHTML = '<span class="loading"></span> Adding...';
-                this.disabled = true;
-                
-                // Reset after a short delay (form will submit)
-                setTimeout(() => {
-                    this.innerHTML = originalText;
-                    this.disabled = false;
-                }, 1000);
+            // Prevent double submission via class check instead of disabled property
+            if (this.classList.contains('processing')) {
+                e.preventDefault();
+                return;
             }
+
+            // Add loading state
+            const originalText = this.innerHTML;
+            this.innerHTML = '<span class="loading"></span> Adding...';
+            this.classList.add('processing');
+            // We do NOT set this.disabled = true; as it can prevent form submission in some browsers
+            
+            // Reset after a short delay (in case navigation doesn't happen)
+            setTimeout(() => {
+                this.innerHTML = originalText;
+                this.classList.remove('processing');
+            }, 2000);
         });
     });
 
