@@ -30,7 +30,21 @@ source venv/bin/activate  # On Windows: venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
-4. Run the application:
+4. Configure the database (Supabase Postgres):
+
+Create a `.env` file in the project root:
+
+```bash
+DATABASE_URL=postgresql+psycopg2://postgres:YOUR_PASSWORD@db.mtzobrvigigsndlzmwdh.supabase.co:5432/postgres?sslmode=require
+```
+
+If you need to run locally with SQLite instead, set:
+
+```bash
+ALLOW_SQLITE=1
+```
+
+5. Run the application:
 ```bash
 python app.py
 ```
@@ -44,7 +58,7 @@ The application will be available at `http://localhost:5000`
 
 ## Database
 
-The application uses SQLite database (`luxury_shopping.db`) which is automatically created on first run. The database includes:
+The application uses the database specified by `DATABASE_URL` (recommended: Supabase Postgres). Tables are automatically created on first run. The database includes:
 
 - Users table with authentication data
 - Products table with inventory
@@ -68,7 +82,7 @@ luxury-shopping/
 │   ├── orders.html       # User orders page
 │   ├── admin.html        # Admin dashboard
 │   └── add_product.html  # Add product form
-└── luxury_shopping.db    # SQLite database (auto-generated)
+└── luxury_shopping.db    # SQLite database (only if ALLOW_SQLITE=1)
 ```
 
 ## Usage
@@ -83,7 +97,7 @@ luxury-shopping/
 ## Technologies Used
 
 - **Backend**: Flask (Python web framework)
-- **Database**: SQLite with SQLAlchemy ORM
+- **Database**: Supabase Postgres (recommended) with SQLAlchemy ORM
 - **Frontend**: HTML5, Tailwind CSS, JavaScript
 - **Authentication**: Flask-WTF with password hashing
 - **Icons**: Font Awesome

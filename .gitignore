@@ -7,6 +7,14 @@ __pycache__/
 venv/
 .env/
 
+# Local environment files
+.env
+.env.*
+!.env.example
+
+# Local virtual environment (Windows-friendly)
+.venv/
+
 # SQLite / local instance data
 instance/
 *.db

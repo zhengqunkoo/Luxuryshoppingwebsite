@@ -10,9 +10,18 @@ import openai
 from google import genai
 from wtforms import StringField, PasswordField, SubmitField, FloatField, TextAreaField, IntegerField, SelectField
 
+from dotenv import load_dotenv
+
+load_dotenv()
+
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'luxury_shopping_secret_key_2024'
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'sqlite:///luxury_shopping.db')
+database_url = os.environ.get('DATABASE_URL')
+if not database_url and os.environ.get('ALLOW_SQLITE') == '1':
+    database_url = 'sqlite:///luxury_shopping.db'
+if not database_url:
+    raise RuntimeError('DATABASE_URL is not set. Configure it to point to Supabase Postgres, or set ALLOW_SQLITE=1 to use SQLite.')
+app.config['SQLALCHEMY_DATABASE_URI'] = database_url
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
