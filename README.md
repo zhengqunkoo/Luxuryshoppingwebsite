@@ -82,11 +82,6 @@ python app.py
 - **All team members** will connect to the same database
 - **No local SQLite** databases will be created
 
-4. **Run the application:**
-```bash
-python app.py
-```
-
 The application will be available at `http://localhost:5000`
 
 ## Default Credentials
