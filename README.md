@@ -10,7 +10,7 @@ A premium e-commerce platform built with Flask, featuring user authentication, p
 - **Order Management**: Complete order processing with status tracking
 - **Admin Panel**: Product management and order administration
 - **Modern UI**: Responsive design with Tailwind CSS
-- **SQL Database**: SQLite database with SQLAlchemy ORM
+- **SQL Database**: Supabase PostgreSQL database with SQLAlchemy ORM
 
 ## Installation
 
@@ -30,21 +30,59 @@ source venv/bin/activate  # On Windows: venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
-4. Configure the database (Supabase Postgres):
+## Database Setup
 
-Create a `.env` file in the project root:
+This project uses **Supabase PostgreSQL** database for all data storage. SQLite is no longer supported.
+
+### Required Environment Variable:
+
+Set the `DATABASE_URL` environment variable with your Supabase credentials:
 
 ```bash
 DATABASE_URL=postgresql+psycopg2://postgres:YOUR_PASSWORD@db.mtzobrvigigsndlzmwdh.supabase.co:5432/postgres?sslmode=require
 ```
 
-If you need to run locally with SQLite instead, set:
+### Quick Start for Team Members:
 
+1. **Clone the repository:**
 ```bash
-ALLOW_SQLITE=1
+git clone [your-repo-url]
+cd luxuryshoppingwebsite-1
 ```
 
-5. Run the application:
+2. **Create virtual environment:**
+```bash
+python -m venv venv
+venv\Scripts\activate  # Windows
+```
+
+3. **Install dependencies:**
+```bash
+pip install -r requirements.txt
+```
+
+4. **Set Supabase connection:**
+```powershell
+# Option A: Environment variable (recommended)
+$env:DATABASE_URL = "postgresql+psycopg2://postgres:YOUR_PASSWORD@db.mtzobrvigigsndlzmwdh.supabase.co:5432/postgres?sslmode=require"
+
+# Option B: Create .env file
+echo DATABASE_URL=postgresql+psycopg2://postgres:YOUR_PASSWORD@db.mtzobrvigigsndlzmwdh.supabase.co:5432/postgres?sslmode=require > .env
+```
+
+5. **Run the application:**
+```bash
+python app.py
+```
+
+### Important Notes:
+
+- **Never commit** `.env` file to GitHub (it's in .gitignore)
+- **Share Supabase credentials** securely with your team
+- **All team members** will connect to the same database
+- **No local SQLite** databases will be created
+
+4. **Run the application:**
 ```bash
 python app.py
 ```
@@ -82,7 +120,7 @@ luxury-shopping/
 │   ├── orders.html       # User orders page
 │   ├── admin.html        # Admin dashboard
 │   └── add_product.html  # Add product form
-└── luxury_shopping.db    # SQLite database (only if ALLOW_SQLITE=1)
+└── .env.example         # Environment variables template
 ```
 
 ## Usage
