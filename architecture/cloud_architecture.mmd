@@ -82,7 +82,6 @@ graph TD
                 end
 
                 %% AI & Security PaaS (Moved out of AKS)
-                OpenAI["Azure OpenAI Service"]
                 KV["Azure Key Vault"]
             end
             
@@ -100,9 +99,6 @@ graph TD
 
             Product_Svc -->|Private Endpoint| Blob
             Web_Svc -->|Private Endpoint| Blob
-
-            %% AI Access
-            AI_Svc -->|Private Endpoint| OpenAI
 
             %% Secrets Access
             AKS -->|Private Endpoint / CSI| KV
