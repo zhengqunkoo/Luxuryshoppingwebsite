@@ -10,7 +10,7 @@ A premium e-commerce platform built with Flask, featuring user authentication, p
 - **Order Management**: Complete order processing with status tracking
 - **Admin Panel**: Product management and order administration
 - **Modern UI**: Responsive design with Tailwind CSS
-- **SQL Database**: Supabase PostgreSQL database with SQLAlchemy ORM
+- **SQL Database**: Azure SQL Database with SQLAlchemy ORM
 
 ## Installation
 
@@ -32,14 +32,14 @@ pip install -r requirements.txt
 
 ## Database Setup
 
-This project uses **Supabase PostgreSQL** database for all data storage. SQLite is no longer supported.
+This project uses an external SQL database for all data storage (recommended: **Azure SQL Database**).
 
 ### Required Environment Variable:
 
-Set the `DATABASE_URL` environment variable with your Supabase credentials:
+Set the `DATABASE_URL` environment variable with your database credentials:
 
 ```bash
-DATABASE_URL=postgresql+psycopg2://postgres:YOUR_PASSWORD@db.mtzobrvigigsndlzmwdh.supabase.co:5432/postgres?sslmode=require
+DATABASE_URL=mssql+pyodbc://USERNAME:PASSWORD@luxurydatabase.database.windows.net:1433/luxurydb?driver=ODBC+Driver+18+for+SQL+Server&Encrypt=yes&TrustServerCertificate=no
 ```
 
 ### Quick Start for Team Members:
@@ -61,13 +61,13 @@ venv\Scripts\activate  # Windows
 pip install -r requirements.txt
 ```
 
-4. **Set Supabase connection:**
+4. **Set database connection:**
 ```powershell
 # Option A: Environment variable (recommended)
-$env:DATABASE_URL = "postgresql+psycopg2://postgres:YOUR_PASSWORD@db.mtzobrvigigsndlzmwdh.supabase.co:5432/postgres?sslmode=require"
+$env:DATABASE_URL = "mssql+pyodbc://USERNAME:PASSWORD@luxurydatabase.database.windows.net:1433/luxurydb?driver=ODBC+Driver+18+for+SQL+Server&Encrypt=yes&TrustServerCertificate=no"
 
 # Option B: Create .env file
-echo DATABASE_URL=postgresql+psycopg2://postgres:YOUR_PASSWORD@db.mtzobrvigigsndlzmwdh.supabase.co:5432/postgres?sslmode=require > .env
+echo DATABASE_URL=mssql+pyodbc://USERNAME:PASSWORD@luxurydatabase.database.windows.net:1433/luxurydb?driver=ODBC+Driver+18+for+SQL+Server\&Encrypt=yes\&TrustServerCertificate=no > .env
 ```
 
 5. **Run the application:**
@@ -78,9 +78,8 @@ python app.py
 ### Important Notes:
 
 - **Never commit** `.env` file to GitHub (it's in .gitignore)
-- **Share Supabase credentials** securely with your team
+- **Share database credentials** securely with your team
 - **All team members** will connect to the same database
-- **No local SQLite** databases will be created
 
 The application will be available at `http://localhost:5000`
 
@@ -91,7 +90,7 @@ The application will be available at `http://localhost:5000`
 
 ## Database
 
-The application uses the database specified by `DATABASE_URL` (recommended: Supabase Postgres). Tables are automatically created on first run. The database includes:
+The application uses the database specified by `DATABASE_URL`. Tables are automatically created on first run. The database includes:
 
 - Users table with authentication data
 - Products table with inventory
@@ -130,7 +129,7 @@ luxury-shopping/
 ## Technologies Used
 
 - **Backend**: Flask (Python web framework)
-- **Database**: Supabase Postgres (recommended) with SQLAlchemy ORM
+- **Database**: Azure SQL Database (recommended) with SQLAlchemy ORM
 - **Frontend**: HTML5, Tailwind CSS, JavaScript
 - **Authentication**: Flask-WTF with password hashing
 - **Icons**: Font Awesome

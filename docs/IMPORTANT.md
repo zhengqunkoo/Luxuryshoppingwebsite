@@ -6,9 +6,9 @@ You can set your AI API Key with /apikey command in the chat box. Currently supp
 ----------------------
 
 
-Supabase:
+Database:
 
-A) Connect to Supabase (recommended)1) Clone the repo
+A) Connect to Azure SQL Database (recommended)1) Clone the repo
 powershell
 
 
@@ -28,23 +28,18 @@ powershell
 
 
 
-pip install -r requirements.txt4) Create .env (this is required now)In the project root, copy the template:• Copy .env.example → .envThen edit .env and set the real Supabase connection string:Password: Funnyjokes123!
+pip install -r requirements.txt4) Create .env (this is required now)In the project root, copy the template:• Copy .env.example → .envThen edit .env and set the real Azure SQL Database connection string:
 env
 
 
-DATABASE_URL=postgresql+psycopg2://postgres:YOUR_PASSWORD@db.mtzobrvigigsndlzmwdh.supabase.co:5432/postgres?sslmode=requireNotes:.env is not committed to GitHub (it’s gitignored).Use a safe way to share the password (don’t paste in public chat).5) Run the website
+DATABASE_URL=mssql+pyodbc://USERNAME:PASSWORD@luxurydatabase.database.windows.net:1433/luxurydb?driver=ODBC+Driver+18+for+SQL+Server&Encrypt=yes&TrustServerCertificate=noNotes:.env is not committed to GitHub (it’s gitignored).Use a safe way to share the password (don’t paste in public chat).5) Run the website
 powershell
 
 
 
-python app.pyOpen:http://localhost:50006) (Optional) Confirm it’s really connected to Supabase
+python app.pyOpen:http://localhost:50006) (Optional) Confirm it’s really connected to Azure SQL Database
 powershell
 
 
 
-python -c "import app; from sqlalchemy import text; app.app.app_context().push(); print(app.db.session.execute(text('select 1')).scalar())"Expected output:1B) If they only want to view the site using SQLite (fallback)If they don’t have Supabase credentials yet, they can run with SQLite by setting:
-powershell
-
-
-$env:ALLOW_SQLITE="1"
-python app.pyThen open:http://localhost:5000(Without DATABASE_URL, the app will otherwise error out—this is intentional.)StatusThese are the exact steps your teammates need to run locally to view the website with Supabase (or SQLite fallback).
+python -c "import app; from sqlalchemy import text; app.app.app_context().push(); print(app.db.session.execute(text('select 1')).scalar())"Expected output:1StatusThese are the exact steps your teammates need to run locally to view the website with Azure SQL Database.
