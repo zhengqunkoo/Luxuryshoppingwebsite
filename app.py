@@ -14,6 +14,10 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+# Load API keys from .env
+OPENAI_API_KEY = os.environ.get('OPENAI_API_KEY')
+GEMINI_API_KEY = os.environ.get('GEMINI_API_KEY')
+
 use_local_db = os.environ.get('USE_LOCAL_DB', 'false').lower() == 'true'
 
 if use_local_db:
@@ -95,6 +99,16 @@ class SiteSetting(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     key = db.Column(db.String(50), unique=True, nullable=False)
     value = db.Column(db.Text, nullable=True)
+
+class RestockOrder(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    product_id = db.Column(db.Integer, db.ForeignKey('product.id'), nullable=False)
+    quantity = db.Column(db.Integer, nullable=False)
+    order_date = db.Column(db.DateTime, default=datetime.utcnow)
+    delivery_date = db.Column(db.DateTime, nullable=False)
+    status = db.Column(db.String(20), default='pending')  # pending, delivered
+    
+    product = db.relationship('Product', backref=db.backref('restock_orders', lazy=True))
 
 class LoginForm(FlaskForm):
     username = StringField('Username', validators=[InputRequired(), Length(min=4, max=20)])
@@ -362,7 +376,29 @@ def admin():
         
     return render_template('admin.html', products=products, orders=orders, form=form)
 
-@app.route('/admin/add_product', methods=['GET', 'POST'])
+@app.route('/admin/update_stock/<int:product_id>', methods=['POST'])
+def update_stock(product_id):
+    if 'user_id' not in session:
+        return redirect(url_for('login'))
+    
+    user = User.query.get(session['user_id'])
+    if not user.is_admin:
+        flash('Access denied', 'error')
+        return redirect(url_for('index'))
+    
+    product = Product.query.get_or_404(product_id)
+    new_stock = request.form.get('stock', type=int)
+    
+    if new_stock is not None and new_stock >= 0:
+        product.stock = new_stock
+        db.session.commit()
+        flash(f'Stock for "{product.name}" updated to {new_stock}', 'success')
+    else:
+        flash('Invalid stock value', 'error')
+    
+    return redirect(url_for('inventory'))
+
+@app.route('/admin/inventory/add_product', methods=['GET', 'POST'])
 def add_product():
     if 'user_id' not in session:
         return redirect(url_for('login'))
@@ -385,9 +421,208 @@ def add_product():
         db.session.add(product)
         db.session.commit()
         flash('Product added successfully!', 'success')
-        return redirect(url_for('admin'))
+        return redirect(url_for('inventory'))
     
     return render_template('add_product.html', form=form)
+
+@app.route('/admin/inventory/edit_product/<int:product_id>', methods=['GET', 'POST'])
+def edit_product(product_id):
+    if 'user_id' not in session:
+        return redirect(url_for('login'))
+    
+    user = User.query.get(session['user_id'])
+    if not user.is_admin:
+        flash('Access denied', 'error')
+        return redirect(url_for('index'))
+    
+    product = Product.query.get_or_404(product_id)
+    form = ProductForm(obj=product)
+    form.submit.label.text = 'Update Product'
+    if form.validate_on_submit():
+        product.name = form.name.data
+        product.description = form.description.data
+        product.price = form.price.data
+        product.category = form.category.data
+        product.stock = form.stock.data
+        product.image_url = form.image_url.data
+        db.session.commit()
+        flash('Product updated successfully!', 'success')
+        return redirect(url_for('inventory'))
+    
+    return render_template('add_product.html', form=form, edit=True, product=product)
+
+@app.route('/admin/inventory/delete_product/<int:product_id>', methods=['POST'])
+def delete_product(product_id):
+    if 'user_id' not in session:
+        return redirect(url_for('login'))
+    
+    user = User.query.get(session['user_id'])
+    if not user.is_admin:
+        flash('Access denied', 'error')
+        return redirect(url_for('index'))
+    
+    product = Product.query.get_or_404(product_id)
+    db.session.delete(product)
+    db.session.commit()
+    flash('Product deleted successfully!', 'success')
+    return redirect(url_for('inventory'))
+
+@app.route('/admin/inventory')
+def inventory():
+    if 'user_id' not in session:
+        return redirect(url_for('login'))
+    
+    user = User.query.get(session['user_id'])
+    if not user.is_admin:
+        flash('Access denied', 'error')
+        return redirect(url_for('index'))
+    
+    products = Product.query.all()
+    
+    # Check for delivered restocks
+    now = datetime.utcnow()
+    pending_restocks = RestockOrder.query.filter_by(status='pending').all()
+    for restock in pending_restocks:
+        if restock.delivery_date <= now:
+            restock.product.stock += restock.quantity
+            restock.status = 'delivered'
+    if pending_restocks:
+        db.session.commit()
+    
+    # Calculate inventory metrics
+    total_products = len(products)
+    total_value = sum(p.price * p.stock for p in products)
+    low_stock_items = [p for p in products if p.stock > 0 and p.stock + sum(r.quantity for r in p.restock_orders if r.status == 'pending') <= 5]
+    out_of_stock_items = [p for p in products if p.stock == 0]
+    
+    # Group by category
+    categories = {}
+    for product in products:
+        if product.category not in categories:
+            categories[product.category] = []
+        categories[product.category].append(product)
+    
+    category_stats = {}
+    for cat, prods in categories.items():
+        category_stats[cat] = {
+            'count': len(prods),
+            'total_value': sum(p.price * p.stock for p in prods),
+            'low_stock': len([p for p in prods if p.stock > 0 and p.stock + sum(r.quantity for r in p.restock_orders if r.status == 'pending') <= 5])
+        }
+    
+    # Get pending restocks for display
+    pending_restock_dict = {}
+    for product in products:
+        pending = [r for r in product.restock_orders if r.status == 'pending']
+        if pending:
+            # Take the earliest
+            earliest = min(pending, key=lambda x: x.delivery_date)
+            pending_restock_dict[product.id] = {
+                'quantity': earliest.quantity,
+                'date': earliest.delivery_date.strftime('%d/%m/%Y')
+            }
+    
+    pending_orders_count = RestockOrder.query.filter_by(status='pending').count()
+    
+    return render_template('inventory.html', 
+                         products=products,
+                         total_products=total_products,
+                         total_value=total_value,
+                         low_stock_items=low_stock_items,
+                         out_of_stock_items=out_of_stock_items,
+                         category_stats=category_stats,
+                         pending_restock_dict=pending_restock_dict,
+                         pending_orders_count=pending_orders_count)
+
+@app.route('/admin/place_order', methods=['GET', 'POST'])
+def place_order():
+    if 'user_id' not in session:
+        return redirect(url_for('login'))
+    
+    user = User.query.get(session['user_id'])
+    if not user.is_admin:
+        flash('Access denied', 'error')
+        return redirect(url_for('index'))
+    
+    products = Product.query.all()
+    low_stock_items = [p for p in products if p.stock > 0 and p.stock + sum(r.quantity for r in p.restock_orders if r.status == 'pending') <= 5]
+    
+    if request.method == 'POST':
+        delivery_date_str = request.form.get('delivery_date')
+        if not delivery_date_str:
+            flash('Delivery date is required', 'error')
+            return redirect(url_for('place_order'))
+        
+        try:
+            delivery_date = datetime.strptime(delivery_date_str, '%d/%m/%Y').date()
+        except ValueError:
+            flash('Invalid delivery date format. Use DD/MM/YYYY', 'error')
+            return redirect(url_for('place_order'))
+        
+        total_amount = 0
+        order_items = []
+        for item in low_stock_items:
+            qty_str = request.form.get(f'quantity_{item.id}')
+            if qty_str:
+                try:
+                    qty = int(qty_str)
+                    if qty > 0:
+                        total_amount += item.price * qty
+                        order_items.append((item, qty))
+                except ValueError:
+                    pass
+        
+        if not order_items:
+            flash('No items selected for order', 'error')
+            return redirect(url_for('place_order'))
+        
+        # Store in session for confirmation
+        session['pending_order'] = {
+            'items': [{'id': item.id, 'name': item.name, 'quantity': qty, 'price': item.price} for item, qty in order_items],
+            'total_amount': total_amount,
+            'delivery_date': delivery_date.isoformat()
+        }
+        return redirect(url_for('confirm_order'))
+    
+    return render_template('place_order.html', low_stock_items=low_stock_items)
+
+@app.route('/admin/confirm_order', methods=['GET', 'POST'])
+def confirm_order():
+    if 'user_id' not in session:
+        return redirect(url_for('login'))
+    
+    user = User.query.get(session['user_id'])
+    if not user.is_admin:
+        flash('Access denied', 'error')
+        return redirect(url_for('index'))
+    
+    pending_order = session.get('pending_order')
+    if not pending_order:
+        flash('No pending order', 'error')
+        return redirect(url_for('inventory'))
+    
+    # Format delivery date
+    try:
+        delivery_date_obj = datetime.strptime(pending_order['delivery_date'], '%Y-%m-%d').date()
+    except ValueError:
+        delivery_date_obj = datetime.strptime(pending_order['delivery_date'], '%d/%m/%Y').date()
+    formatted_date = delivery_date_obj.strftime('%d/%m/%Y')
+    pending_order['formatted_delivery_date'] = formatted_date
+    
+    if request.method == 'POST':
+        for item in pending_order['items']:
+            restock = RestockOrder(
+                product_id=item['id'],
+                quantity=item['quantity'],
+                delivery_date=delivery_date_obj
+            )
+            db.session.add(restock)
+        db.session.commit()
+        session.pop('pending_order', None)
+        flash('Order placed successfully!', 'success')
+        return redirect(url_for('inventory'))
+    
+    return render_template('confirm_order.html', order=pending_order)
 
 @app.route('/api/ask_advisor', methods=['POST'])
 def ask_advisor():
@@ -404,7 +639,7 @@ def ask_advisor():
         provider = client_provider
     else:
         provider_setting = SiteSetting.query.filter_by(key='ai_provider').first()
-        provider = provider_setting.value if provider_setting else 'openai'
+        provider = provider_setting.value if provider_setting else 'gemini'
 
     # Determine API Key: Client (Dev) > DB (Prod)
     final_api_key = None
@@ -418,7 +653,7 @@ def ask_advisor():
         else:
             key_setting = SiteSetting.query.filter_by(key='openai_api_key').first()
             
-        final_api_key = key_setting.value if key_setting else None
+        final_api_key = key_setting.value if key_setting else (GEMINI_API_KEY if provider == 'gemini' else OPENAI_API_KEY)
     
     if not final_api_key:
         return jsonify({'error': f'{provider.title()} Service not configured'}), 503

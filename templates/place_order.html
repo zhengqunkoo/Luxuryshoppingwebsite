@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block title %}Place Restock Order - Luxury Shopping{% endblock %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1><i class="fas fa-shopping-cart"></i> Place Restock Order</h1>
+        <a href="{{ url_for('inventory') }}" class="btn btn-secondary">
+            <i class="fas fa-arrow-left"></i> Back to Inventory
+        </a>
+    </div>
+
+    <div class="card">
+        <div class="card-header">
+            <h5>Select Quantities for Low Stock Items</h5>
+        </div>
+        <div class="card-body">
+            <form method="POST">
+                <div class="mb-3">
+                    <label for="delivery_date" class="form-label">Expected Delivery Date</label>
+                    <input type="text" class="form-control" id="delivery_date" name="delivery_date" pattern="[0-9]{2}/[0-9]{2}/[0-9]{4}" placeholder="DD/MM/YYYY" required>
+                </div>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Product</th>
+                            <th>Current Stock</th>
+                            <th>Price</th>
+                            <th>Quantity to Order</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for product in low_stock_items %}
+                        <tr>
+                            <td>{{ product.name }}</td>
+                            <td>{{ product.stock }}</td>
+                            <td>${{ "%.2f"|format(product.price) }}</td>
+                            <td>
+                                <input type="number" class="form-control" name="quantity_{{ product.id }}" min="0" placeholder="0">
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <button type="submit" class="btn btn-primary">Review Order</button>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    flatpickr("#delivery_date", {
+        dateFormat: "d/m/Y",
+        minDate: "today"
+    });
+});
+</script>
+{% endblock %}
