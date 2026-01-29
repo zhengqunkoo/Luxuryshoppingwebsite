@@ -230,6 +230,40 @@ document.addEventListener('DOMContentLoaded', function() {
 
     if (!chatToggle) return; // Only run if widget exists
 
+    // Generate or retrieve persistent session ID
+    let sessionId = localStorage.getItem('lux_chat_session_id');
+    if (!sessionId) {
+        sessionId = 'session_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+        localStorage.setItem('lux_chat_session_id', sessionId);
+    }
+
+    // Load conversation history on page load
+    loadConversationHistory();
+
+    async function loadConversationHistory() {
+        try {
+            const response = await fetch(`/api/conversation_history?session_id=${encodeURIComponent(sessionId)}`);
+            const data = await response.json();
+            
+            if (data.history && data.history.length > 0) {
+                // Clear the default greeting and rebuild conversation
+                chatMessages.innerHTML = '';
+                
+                // Always start with the greeting
+                addMessage("Hello! I'm Lux, your personal shopping advisor. How can I assist you today?", 'ai');
+                
+                // Add the conversation history
+                data.history.forEach(msg => {
+                    addMessage(msg.content, msg.role === 'assistant' ? 'ai' : 'user');
+                });
+            }
+            // If no history, keep the default greeting in HTML
+        } catch (error) {
+            console.log('Could not load conversation history:', error);
+            // Keep the default greeting if history can't be loaded
+        }
+    }
+
     function toggleChat() {
         if (chatWindow.style.display === 'none' || chatWindow.style.display === '') {
             chatWindow.style.display = 'flex';
@@ -279,6 +313,16 @@ document.addEventListener('DOMContentLoaded', function() {
             chatInput.value = '';
             return;
         }
+        if (text === '/clearsession') {
+            // Generate new session ID
+            sessionId = 'session_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+            localStorage.setItem('lux_chat_session_id', sessionId);
+            // Clear chat messages
+            chatMessages.innerHTML = '<div class="message ai">Hello! I\'m Lux, your personal shopping advisor. How can I assist you today?</div>';
+            addMessage('System: New conversation session started.', 'ai');
+            chatInput.value = '';
+            return;
+        }
 
         addMessage(text, 'user');
         chatInput.value = '';
@@ -304,7 +348,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 body: JSON.stringify({ 
                     question: text,
                     api_key: devKey,
-                    provider: devProvider
+                    provider: devProvider,
+                    session_id: sessionId
                 })
             });
 
