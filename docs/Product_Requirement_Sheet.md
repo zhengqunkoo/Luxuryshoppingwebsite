@@ -50,6 +50,13 @@
 *   **FR-10:** ✅ Create a unified view of orders from all channels.
 *   **FR-11:** ✅ Workflow for order processing: Placed -> Confirmed -> Shipped/Ready -> Completed/Returned.
 
+#### 4.5 Admin Workflows
+*   **AW-01:** ✅ Admin dashboard with quick stats (total products, orders, pending orders, revenue) that are clickable to scroll to relevant sections.
+*   **AW-02:** ✅ Orders management page for viewing, updating order status, and detailed order information.
+*   **AW-03:** ✅ AI Advisor settings for configuring API keys and provider selection (OpenAI/Gemini).
+*   **AW-04:** ✅ Inventory management page with stock tracking, restock alerts, pending deliveries, and add/edit/delete products.
+*   **AW-05:** ⚠️ User role management (Admin access enforcement implemented, no UI).
+
 **Implementation Status Legend:**  
 ✅ Implemented | ⚠️ Partially Implemented | ❌ Not Implemented
 
