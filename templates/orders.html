@@ -20,12 +20,12 @@
                         <span class="badge bg-{{ 'success' if order.status == 'completed' else 'warning' if order.status == 'pending' else 'info' }}">
                             {{ order.status.title() }}
                         </span>
-                        <h5 class="text-primary mb-0 ms-3">${{ "%.2f"|format(order.total_amount) }}</h5>
+                        <h5 class="text-primary mb-0 ms-3">${{ "%.2f"|format(order.total) }}</h5>
                     </div>
                 </div>
                 <div class="card-body">
                     <div class="row">
-                        {% for item in order.items %}
+                        {% for item in order.order_items %}
                         <div class="col-md-6 mb-3">
                             <div class="d-flex align-items-center">
                                 {% if item.product.image_url %}

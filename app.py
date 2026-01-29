@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for, session, flash, jsonify
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy.orm import joinedload
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, FloatField, TextAreaField, IntegerField
 from wtforms.validators import InputRequired, Length, ValidationError, NumberRange
@@ -84,6 +85,7 @@ class Order(db.Model):
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     
     user = db.relationship('User', backref=db.backref('orders', lazy=True))
+    order_items = db.relationship('OrderItem', lazy=True, overlaps="items")
 
 class OrderItem(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -92,8 +94,7 @@ class OrderItem(db.Model):
     quantity = db.Column(db.Integer, nullable=False)
     price = db.Column(db.Float, nullable=False)
     
-    order = db.relationship('Order', backref=db.backref('items', lazy=True))
-    product = db.relationship('Product', backref=db.backref('order_items', lazy=True))
+    product = db.relationship('Product', backref='order_items')
 
 class SiteSetting(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -289,7 +290,7 @@ def checkout():
 
         total = sum(item.product.price * item.quantity for item in cart_items)
 
-        order = Order(user_id=session['user_id'], total_amount=total)
+        order = Order(user_id=session['user_id'], total=total)
         db.session.add(order)
         db.session.flush()
 
@@ -317,7 +318,7 @@ def orders():
     if 'user_id' not in session:
         return redirect(url_for('login'))
     
-    user_orders = Order.query.filter_by(user_id=session['user_id']).order_by(Order.created_at.desc()).all()
+    user_orders = Order.query.filter_by(user_id=session['user_id']).options(joinedload(Order.order_items).joinedload(OrderItem.product)).order_by(Order.created_at.desc()).all()
     return render_template('orders.html', orders=user_orders)
 
 @app.route('/admin', methods=['GET', 'POST'])
@@ -737,5 +738,39 @@ if __name__ == '__main__':
         if leather_jacket and leather_jacket.image_url != 'https://images.unsplash.com/photo-1521223890158-f9f7c3d5d504?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80':
             leather_jacket.image_url = 'https://images.unsplash.com/photo-1521223890158-f9f7c3d5d504?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80'
             db.session.commit()
+
+@app.route('/admin/orders')
+def admin_orders():
+    if 'user_id' not in session:
+        return redirect(url_for('login'))
     
+    user = User.query.get(session['user_id'])
+    if not user.is_admin:
+        flash('Access denied', 'error')
+        return redirect(url_for('index'))
+    
+    orders = Order.query.options(joinedload(Order.order_items).joinedload(OrderItem.product)).order_by(Order.created_at.desc()).all()
+    return render_template('admin_orders.html', orders=orders)
+
+@app.route('/admin/update_order_status/<int:order_id>', methods=['POST'])
+def update_order_status(order_id):
+    if 'user_id' not in session:
+        return redirect(url_for('login'))
+    
+    user = User.query.get(session['user_id'])
+    if not user.is_admin:
+        flash('Access denied', 'error')
+        return redirect(url_for('index'))
+    
+    order = Order.query.get_or_404(order_id)
+    if order.status == 'pending':
+        order.status = 'completed'
+        db.session.commit()
+        flash('Order marked as completed', 'success')
+    else:
+        flash('Order is already completed', 'info')
+    
+    return redirect(url_for('admin_orders'))
+
+if __name__ == '__main__':
     app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 5000)), debug=True)
