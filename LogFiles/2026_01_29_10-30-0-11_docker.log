@@ -1,0 +1,95 @@
+2026-01-29T04:31:53.5820873Z Container start method called.
+2026-01-29T04:31:53.5887291Z Establishing network.
+2026-01-29T04:31:53.5891458Z Pulling image: luxuryshoppingacr.azurecr.io/luxuryshoppingwebsite:latest.
+2026-01-29T04:32:17.4419467Z Image luxuryshoppingacr.azurecr.io/luxuryshoppingwebsite:latest is pulled from registry luxuryshoppingacr.azurecr.io
+2026-01-29T04:32:17.6368459Z Container is starting.
+2026-01-29T04:32:17.7546733Z Establishing user namespace if not established already.
+2026-01-29T04:32:17.7598517Z Establishing network if not established already.
+2026-01-29T04:32:17.7664435Z Mounting volumes.
+2026-01-29T04:32:17.8217267Z Nested mountpoint volatile/logs
+2026-01-29T04:32:17.8705920Z Nested mountpoint 
+2026-01-29T04:32:18.1404537Z Creating container.
+2026-01-29T04:32:18.1576203Z Creating pipes for streaming container io.
+2026-01-29T04:32:18.1736113Z Creating stdout named pipe at /podr/container/pipe/bc319001e28b_luxuryshoppingwebsite/stdout_b01f8ecd1e6f4f26bac886453c65ee0c.
+2026-01-29T04:32:18.1854371Z Successfully created stdout named pipe at: /podr/container/pipe/bc319001e28b_luxuryshoppingwebsite/stdout_b01f8ecd1e6f4f26bac886453c65ee0c.
+2026-01-29T04:32:18.1937243Z Opening named pipe /podr/container/pipe/bc319001e28b_luxuryshoppingwebsite/stdout_b01f8ecd1e6f4f26bac886453c65ee0c for reading in non-blocking mode.
+2026-01-29T04:32:18.1939769Z Successfully opened named pipe: /podr/container/pipe/bc319001e28b_luxuryshoppingwebsite/stdout_b01f8ecd1e6f4f26bac886453c65ee0c.
+2026-01-29T04:32:18.2053454Z Successfully removed non-blocking flag from /podr/container/pipe/bc319001e28b_luxuryshoppingwebsite/stdout_b01f8ecd1e6f4f26bac886453c65ee0c.
+2026-01-29T04:32:18.2085709Z Creating stderr named pipe at /podr/container/pipe/bc319001e28b_luxuryshoppingwebsite/stderr_9a3442785b804e1ab788cea02431caca.
+2026-01-29T04:32:18.2090310Z Successfully created stderr named pipe at: /podr/container/pipe/bc319001e28b_luxuryshoppingwebsite/stderr_9a3442785b804e1ab788cea02431caca.
+2026-01-29T04:32:18.2095082Z Opening named pipe /podr/container/pipe/bc319001e28b_luxuryshoppingwebsite/stderr_9a3442785b804e1ab788cea02431caca for reading in non-blocking mode.
+2026-01-29T04:32:18.2269561Z Successfully opened named pipe: /podr/container/pipe/bc319001e28b_luxuryshoppingwebsite/stderr_9a3442785b804e1ab788cea02431caca.
+2026-01-29T04:32:18.2402032Z Successfully removed non-blocking flag from /podr/container/pipe/bc319001e28b_luxuryshoppingwebsite/stderr_9a3442785b804e1ab788cea02431caca.
+2026-01-29T04:32:18.2605628Z Creating container with image: luxuryshoppingacr.azurecr.io/luxuryshoppingwebsite:latest from registry: luxuryshoppingacr.azurecr.io and fully qualified image name: luxuryshoppingacr.azurecr.io/luxuryshoppingwebsite:latest
+2026-01-29T04:32:27.1035120Z Starting container: bc319001e28b_luxuryshoppingwebsite.
+2026-01-29T04:32:28.4022947Z Starting watchers and probes.
+2026-01-29T04:32:29.0367430Z Starting metrics collection.
+2026-01-29T04:32:29.1489154Z Container is running.
+2026-01-29T04:32:30.9952795Z Container start method finished after 37411 ms.
+2026-01-29T04:34:23.5159019Z Site startup probe succeeded after 112.2079457 seconds.
+2026-01-29T04:34:23.9767864Z Site started.
+2026-01-29T04:34:28.6723692Z Container start method called.
+2026-01-29T04:34:28.6727869Z Establishing network.
+2026-01-29T04:34:28.6731175Z Pulling image: luxuryshoppingacr.azurecr.io/luxuryshoppingwebsite:latest.
+2026-01-29T04:34:29.5008180Z Container is starting.
+2026-01-29T04:34:29.5012056Z Establishing user namespace if not established already.
+2026-01-29T04:34:29.5013636Z Establishing network if not established already.
+2026-01-29T04:34:29.5016615Z Mounting volumes.
+2026-01-29T04:34:29.5031737Z Nested mountpoint volatile/logs
+2026-01-29T04:34:29.5071899Z Nested mountpoint 
+2026-01-29T04:34:29.5710859Z Creating container.
+2026-01-29T04:34:29.5733481Z Creating pipes for streaming container io.
+2026-01-29T04:34:29.5739568Z Creating stdout named pipe at /podr/container/pipe/1744efdbcf13_luxuryshoppingwebsite/stdout_a91b46ba96f04d3780737297a5ef1966.
+2026-01-29T04:34:29.5742442Z Successfully created stdout named pipe at: /podr/container/pipe/1744efdbcf13_luxuryshoppingwebsite/stdout_a91b46ba96f04d3780737297a5ef1966.
+2026-01-29T04:34:29.5748381Z Opening named pipe /podr/container/pipe/1744efdbcf13_luxuryshoppingwebsite/stdout_a91b46ba96f04d3780737297a5ef1966 for reading in non-blocking mode.
+2026-01-29T04:34:29.5750004Z Successfully opened named pipe: /podr/container/pipe/1744efdbcf13_luxuryshoppingwebsite/stdout_a91b46ba96f04d3780737297a5ef1966.
+2026-01-29T04:34:29.5751211Z Successfully removed non-blocking flag from /podr/container/pipe/1744efdbcf13_luxuryshoppingwebsite/stdout_a91b46ba96f04d3780737297a5ef1966.
+2026-01-29T04:34:29.5752513Z Creating stderr named pipe at /podr/container/pipe/1744efdbcf13_luxuryshoppingwebsite/stderr_eed023901ec04e12ba5a1a482425f1ba.
+2026-01-29T04:34:29.5754402Z Successfully created stderr named pipe at: /podr/container/pipe/1744efdbcf13_luxuryshoppingwebsite/stderr_eed023901ec04e12ba5a1a482425f1ba.
+2026-01-29T04:34:29.5806093Z Opening named pipe /podr/container/pipe/1744efdbcf13_luxuryshoppingwebsite/stderr_eed023901ec04e12ba5a1a482425f1ba for reading in non-blocking mode.
+2026-01-29T04:34:29.5824766Z Successfully opened named pipe: /podr/container/pipe/1744efdbcf13_luxuryshoppingwebsite/stderr_eed023901ec04e12ba5a1a482425f1ba.
+2026-01-29T04:34:29.5842675Z Successfully removed non-blocking flag from /podr/container/pipe/1744efdbcf13_luxuryshoppingwebsite/stderr_eed023901ec04e12ba5a1a482425f1ba.
+2026-01-29T04:34:29.5851120Z Creating container with image: luxuryshoppingacr.azurecr.io/luxuryshoppingwebsite:latest from registry: luxuryshoppingacr.azurecr.io and fully qualified image name: luxuryshoppingacr.azurecr.io/luxuryshoppingwebsite:latest
+2026-01-29T04:34:30.9047599Z Starting container: 1744efdbcf13_luxuryshoppingwebsite.
+2026-01-29T04:34:31.1167200Z Starting watchers and probes.
+2026-01-29T04:34:31.1174876Z Starting metrics collection.
+2026-01-29T04:34:31.1177245Z Container is running.
+2026-01-29T04:34:31.2577739Z Container start method finished after 2585 ms.
+2026-01-29T04:34:40.3110474Z Site startup probe succeeded after 9.033544 seconds.
+2026-01-29T04:34:40.5028501Z Site started.
+2026-01-29T04:35:00.5850693Z Container is terminating. Grace period: 5 seconds.
+2026-01-29T04:35:00.6355644Z Stop and delete container. Retry count = 0
+2026-01-29T04:35:00.6368890Z Stopping container: bc319001e28b_luxuryshoppingwebsite.
+2026-01-29T04:35:02.2560268Z Deleting container: bc319001e28b_luxuryshoppingwebsite. Retry count = 0
+2026-01-29T04:35:02.5393728Z Container spec TerminationMessagePolicy  path 
+2026-01-29T04:35:02.5427813Z Container is terminated. Total time elapsed: 1956 ms.
+2026-01-29T04:35:02.5491468Z Site: luxuryshoppingwebsite stopped.
+2026-01-29T04:45:12.5396338Z Container start method called.
+2026-01-29T04:45:12.5398698Z Establishing network.
+2026-01-29T04:45:12.5400441Z Pulling image: luxuryshoppingacr.azurecr.io/luxuryshoppingwebsite:latest.
+2026-01-29T04:45:13.1572753Z Container is starting.
+2026-01-29T04:45:13.1575118Z Establishing user namespace if not established already.
+2026-01-29T04:45:13.1579312Z Establishing network if not established already.
+2026-01-29T04:45:13.1580912Z Mounting volumes.
+2026-01-29T04:45:13.1583111Z Nested mountpoint volatile/logs
+2026-01-29T04:45:13.4012354Z Nested mountpoint 
+2026-01-29T04:45:13.5756614Z Creating container.
+2026-01-29T04:45:13.5786584Z Creating pipes for streaming container io.
+2026-01-29T04:45:13.5792669Z Creating stdout named pipe at /podr/container/pipe/2dddbecc57ef_luxuryshoppingwebsite/stdout_f4007dfa07e4427884373bc0a01df663.
+2026-01-29T04:45:13.6215401Z Successfully created stdout named pipe at: /podr/container/pipe/2dddbecc57ef_luxuryshoppingwebsite/stdout_f4007dfa07e4427884373bc0a01df663.
+2026-01-29T04:45:13.6217076Z Opening named pipe /podr/container/pipe/2dddbecc57ef_luxuryshoppingwebsite/stdout_f4007dfa07e4427884373bc0a01df663 for reading in non-blocking mode.
+2026-01-29T04:45:13.6218806Z Successfully opened named pipe: /podr/container/pipe/2dddbecc57ef_luxuryshoppingwebsite/stdout_f4007dfa07e4427884373bc0a01df663.
+2026-01-29T04:45:13.6671780Z Successfully removed non-blocking flag from /podr/container/pipe/2dddbecc57ef_luxuryshoppingwebsite/stdout_f4007dfa07e4427884373bc0a01df663.
+2026-01-29T04:45:13.7142807Z Creating stderr named pipe at /podr/container/pipe/2dddbecc57ef_luxuryshoppingwebsite/stderr_3a0747e5e1eb49e899e3b2bd3c5d717b.
+2026-01-29T04:45:13.7170346Z Successfully created stderr named pipe at: /podr/container/pipe/2dddbecc57ef_luxuryshoppingwebsite/stderr_3a0747e5e1eb49e899e3b2bd3c5d717b.
+2026-01-29T04:45:13.7172423Z Opening named pipe /podr/container/pipe/2dddbecc57ef_luxuryshoppingwebsite/stderr_3a0747e5e1eb49e899e3b2bd3c5d717b for reading in non-blocking mode.
+2026-01-29T04:45:13.7262469Z Successfully opened named pipe: /podr/container/pipe/2dddbecc57ef_luxuryshoppingwebsite/stderr_3a0747e5e1eb49e899e3b2bd3c5d717b.
+2026-01-29T04:45:13.7560977Z Successfully removed non-blocking flag from /podr/container/pipe/2dddbecc57ef_luxuryshoppingwebsite/stderr_3a0747e5e1eb49e899e3b2bd3c5d717b.
+2026-01-29T04:45:13.7689598Z Creating container with image: luxuryshoppingacr.azurecr.io/luxuryshoppingwebsite:latest from registry: luxuryshoppingacr.azurecr.io and fully qualified image name: luxuryshoppingacr.azurecr.io/luxuryshoppingwebsite:latest
+2026-01-29T04:45:15.6728692Z Starting container: 2dddbecc57ef_luxuryshoppingwebsite.
+2026-01-29T04:45:15.7480193Z Starting watchers and probes.
+2026-01-29T04:45:15.7519742Z Starting metrics collection.
+2026-01-29T04:45:15.7556301Z Container is running.
+2026-01-29T04:45:15.8470283Z Container start method finished after 3305 ms.
+2026-01-29T04:45:39.0608965Z Site startup probe succeeded after 23.1891259 seconds.
+2026-01-29T04:45:40.0030345Z Site started.

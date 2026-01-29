@@ -16,9 +16,7 @@ load_dotenv()
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'luxury_shopping_secret_key_2024'
-database_url = os.environ.get('DATABASE_URL')
-if not database_url:
-    raise RuntimeError('DATABASE_URL is not set. Configure it to point to your SQL database.')
+database_url = os.environ.get('DATABASE_URL', 'mssql+pyodbc://luxuryadmin:LuxuryPass2024!@luxuryshopping-sql.database.windows.net:1433/luxurydb?driver=ODBC+Driver+18+for+SQL+Server&Encrypt=yes&TrustServerCertificate=no')
 app.config['SQLALCHEMY_DATABASE_URI'] = database_url
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
