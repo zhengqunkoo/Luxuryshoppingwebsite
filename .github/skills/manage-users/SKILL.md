@@ -1,3 +1,8 @@
+---
+name: manage-users
+description: Manage user roles and access control within the application.
+---
+
 # User Role Management Skill
 
 This skill explains how to manage user access and roles within the application (AW-05).

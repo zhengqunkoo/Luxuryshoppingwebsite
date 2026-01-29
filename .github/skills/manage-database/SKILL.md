@@ -1,3 +1,8 @@
+---
+name: manage-database
+description: Manage application databases including local development and remote production environments.
+---
+
 # Database Management Skill
 
 This skill details how to manage the application's database, including switching between local and remote environments and handling migrations.

@@ -1,3 +1,8 @@
+---
+name: manage-inventory
+description: Manage product inventory including stock tracking, restocks, and catalog maintenance.
+---
+
 # Inventory Management Skill
 
 This skill guides you through managing the product inventory for the Luxury Shopping Website, including stock tracking, restocks, and product updates (AW-04).

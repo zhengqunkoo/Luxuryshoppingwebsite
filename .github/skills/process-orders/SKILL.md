@@ -1,3 +1,8 @@
+---
+name: process-orders
+description: Manage customer order processing from placement to completion.
+---
+
 # Order Processing Skill
 
 This skill outlines the workflow for managing customer orders from placement to completion (AW-02).
