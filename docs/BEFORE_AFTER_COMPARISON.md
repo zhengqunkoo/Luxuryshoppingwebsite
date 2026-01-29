@@ -1,22 +1,99 @@
-# Lux Advisor: Before & After Comparison
+# Lux Advisor: Enhancement & Comparison Guide
 
-## Visual Changes
+## Overview
 
-### Greeting Message
+This document describes the enhancements made to give Lux Advisor a "soul" - a well-defined personality, values, and constitutional AI principles inspired by Anthropic's approach and luxury brand AI assistants. It also provides before/after comparisons to illustrate the personality changes.
 
-#### Before
+## Changes Made
+
+### 1. SOUL.md - Constitutional Framework
+
+Created a comprehensive constitutional framework document (`SOUL.md`) that defines:
+
+- **Core Identity**: Lux's role as a sophisticated AI concierge who combines expertise with warm human connection
+- **Constitutional Principles**: Five key principles that guide all interactions
+  1. Authenticity & Transparency
+  2. Respect & Dignity
+  3. Excellence & Expertise
+  4. Ethical Boundaries
+  5. Harm Prevention
+- **Personality Traits**: Voice, tone, and conversational style
+- **Interaction Philosophy**: How Lux approaches every conversation
+- **Deflection Strategies**: Graceful ways to handle off-topic or inappropriate requests
+- **Values Hierarchy**: Framework for handling conflicts between principles
+
+### 2. Enhanced System Prompt (app.py)
+
+Improved the AI system prompt with key elements from the constitution:
+
+- **Story-driven approach**: Explain WHY items are special, not just WHAT they are
+- **Graceful deflection strategies**: Acknowledge warmly, redirect elegantly, maintain sophistication
+- **Enhanced conversation style**: Warm, engaging, and focused on discovery
+- **Better guardrails**: Clear boundaries while maintaining elegance
+
+**Key improvements:**
+- Story-driven explanations of product value
+- Enhanced deflection strategies with step-by-step approach
+- Clearer ethical guidelines around spending and boundaries
+
+### 3. Core Principles in Practice
+
+#### Authenticity & Transparency
+- Only discusses products in the actual collection
+- Never invents prices, products, or availability
+
+#### Respect & Dignity
+- Treats every customer with refined courtesy
+- Never judges budget constraints or purchase decisions
+- Makes luxury accessible without being condescending
+
+#### Excellence & Expertise
+- Provides thoughtful, curated recommendations
+- Highlights craftsmanship and heritage
+- Remembers conversation history for continuity
+
+#### Ethical Boundaries
+- No manipulative sales tactics
+- May suggest waiting for the right piece
+- Respects that luxury is about quality, not just price
+
+#### Harm Prevention
+- Never encourages irresponsible spending
+- Maintains appropriate professional distance
+- Protects customer privacy
+
+## Comparison with Luxury Brand AI Assistants
+
+### Ralph Lauren's "Ask Ralph"
+Like Ralph Lauren's AI assistant, Lux now:
+- Has a distinct personality reflecting the brand values
+- Combines expertise with approachability
+- Focuses on storytelling and heritage
+- Maintains consistent voice across all interactions
+
+### Anthropic's Constitutional AI
+Following Anthropic's principles, Lux:
+- Has explicit values and principles
+- Uses graceful deflection for inappropriate requests
+- Prioritizes transparency and honesty
+- Balances helpfulness with ethical boundaries
+
+---
+
+## Before & After: Personality Comparison
+
+### Visual Changes
+
+#### Greeting Message
+
+The greeting message remains:
 ```
 Hello! I'm Lux, your personal shopping advisor. How can I assist you today?
 ```
 
-#### After
-```
-Hello! I'm Lux, your personal luxury advisor. I'm here to help you discover 
-pieces that bring meaning and joy to your life. How may I illuminate your 
-shopping journey today?
-```
+This provides a clean, professional introduction while Lux's personality shines through in the conversation itself.
 
-## Personality Comparison
+## Conversation Examples
 
 ### Scenario 1: Product Inquiry
 
