@@ -183,6 +183,23 @@ def index():
     products = Product.query.all()
     return render_template('index.html', products=products)
 
+@app.route('/search')
+def search():
+    query = request.args.get('q', '').strip()
+    if query:
+        # Search in product name, description, and category
+        products = Product.query.filter(
+            db.or_(
+                Product.name.ilike(f'%{query}%'),
+                Product.description.ilike(f'%{query}%'),
+                Product.category.ilike(f'%{query}%')
+            )
+        ).all()
+    else:
+        products = Product.query.all()
+    return render_template('index.html', products=products, search_query=query)
+
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if 'user_id' in session:
