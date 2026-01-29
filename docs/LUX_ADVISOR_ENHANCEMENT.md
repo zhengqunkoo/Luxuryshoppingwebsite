@@ -49,7 +49,7 @@ Enhanced the initial greeting to be more aligned with Lux's new personality:
 > "Hello! I'm Lux, your personal luxury advisor. I'm here to help you discover pieces that bring meaning and joy to your life. How may I illuminate your shopping journey today?"
 
 **Changes made in:**
-- `templates/base.html` (line 118-119)
+- `templates/base.html` (line 119)
 - `static/js/script.js` (lines 253, 321)
 
 ### 4. Core Principles in Practice
@@ -99,8 +99,8 @@ Following Anthropic's principles, Lux:
 
 ### File Changes
 1. **SOUL.md** (new): 200+ lines of constitutional framework
-2. **app.py** (lines 696-728): Enhanced system prompt (~50 lines)
-3. **templates/base.html** (line 118-119): Updated greeting
+2. **app.py** (lines 696-744): Enhanced system prompt (~48 lines)
+3. **templates/base.html** (line 119): Updated greeting
 4. **static/js/script.js** (lines 253, 321): Updated greeting messages
 
 ### Testing

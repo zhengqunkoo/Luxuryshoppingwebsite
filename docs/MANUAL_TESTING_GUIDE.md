@@ -120,8 +120,8 @@ Test the following conversations to verify Lux's new personality:
 ## Files Modified
 
 1. `SOUL.md` - New constitutional framework document
-2. `app.py` - Enhanced system prompt (lines 696-728)
-3. `templates/base.html` - Updated greeting (line 118-119)
+2. `app.py` - Enhanced system prompt (lines 696-744)
+3. `templates/base.html` - Updated greeting (line 119)
 4. `static/js/script.js` - Updated greeting messages (lines 253, 321)
 5. `docs/LUX_ADVISOR_ENHANCEMENT.md` - Comprehensive documentation
 
