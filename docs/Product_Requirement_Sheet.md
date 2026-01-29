@@ -32,23 +32,26 @@
 ### 4. Functional Requirements
 
 #### 4.1 AI & Personalization ("Virtual Advisor")
-*   **FR-01:** Integrate Azure OpenAI Services to provide conversational product discovery.
-*   **FR-02:** AI must explicitly label itself as an automated assistant to maintain trust (Transparency).
-*   **FR-03:** AI should utilize customer purchase history and browsing behavior (via Azure AI Search) to tailor recommendations.
+*   **FR-01:** ✅ Integrate Azure OpenAI Services to provide conversational product discovery.
+*   **FR-02:** ✅ AI must explicitly label itself as an automated assistant to maintain trust (Transparency).
+*   **FR-03:** ⚠️ AI should utilize customer purchase history and browsing behavior (via Azure AI Search) to tailor recommendations.
 
 #### 4.2 Product Catalog & Inventory
-*   **FR-04:** Centralized product database (Azure SQL) acting as the single source of truth.
-*   **FR-05:** Support for high-resolution images and rich product descriptions (stored in Azure Blob Storage).
-*   **FR-06:** Real-time inventory synchronization to support "Ship from Store" and "Click & Collect".
+*   **FR-04:** ✅ Centralized product database (Azure SQL) acting as the single source of truth.
+*   **FR-05:** ✅ Support for high-resolution images and rich product descriptions (stored in Azure Blob Storage).
+*   **FR-06:** ⚠️ Real-time inventory synchronization to support "Ship from Store" and "Click & Collect".
 
 #### 4.3 User Authentication & Security
-*   **FR-07:** Implement Azure AD B2C for customer sign-up, sign-in, and profile management.
-*   **FR-08:** Enforce Role-Based Access Control (RBAC) for Shopkeepers and Admins.
-*   **FR-09:** Secure all sensitive data (PII, payment tokens) using encryption and Azure Key Vault.
+*   **FR-07:** ❌ Implement Azure AD B2C for customer sign-up, sign-in, and profile management.
+*   **FR-08:** ✅ Enforce Role-Based Access Control (RBAC) for Shopkeepers and Admins.
+*   **FR-09:** ⚠️ Secure all sensitive data (PII, payment tokens) using encryption and Azure Key Vault.
 
 #### 4.4 Order Management System (OMS)
-*   **FR-10:** Create a unified view of orders from all channels.
-*   **FR-11:** Workflow for order processing: Placed -> Confirmed -> Shipped/Ready -> Completed/Returned.
+*   **FR-10:** ✅ Create a unified view of orders from all channels.
+*   **FR-11:** ✅ Workflow for order processing: Placed -> Confirmed -> Shipped/Ready -> Completed/Returned.
+
+**Implementation Status Legend:**  
+✅ Implemented | ⚠️ Partially Implemented | ❌ Not Implemented
 
 ### 5. Non-Functional Requirements
 
