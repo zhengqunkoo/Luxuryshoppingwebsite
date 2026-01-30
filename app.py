@@ -221,6 +221,35 @@ def index():
         
     return render_template('index.html', categorized_products=categorized_products)
 
+@app.route('/search')
+def search():
+    query = request.args.get('q', '').strip()
+    # Limit query length to prevent performance issues
+    if len(query) > 200:
+        query = query[:200]
+    
+    # If the query is empty after stripping/truncation, show the default index view
+    if not query:
+        return redirect(url_for('index'))
+    
+    # Sanitize SQL LIKE wildcards to prevent unexpected matching behavior across backends
+    sanitized_query = query.replace('%', '').replace('_', '')
+    
+    # If sanitization results in empty string (user searched only wildcards), redirect to index
+    if not sanitized_query:
+        return redirect(url_for('index'))
+    
+    # Search in product name, description, and category
+    products = Product.query.filter(
+        db.or_(
+            Product.name.ilike(f'%{sanitized_query}%'),
+            Product.description.ilike(f'%{sanitized_query}%'),
+            Product.category.ilike(f'%{sanitized_query}%')
+        )
+    ).all()
+    return render_template('index.html', products=products, search_query=query)
+
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if 'user_id' in session:
