@@ -196,6 +196,11 @@ def search():
     
     # Sanitize SQL LIKE wildcards to prevent unexpected matching behavior across backends
     sanitized_query = query.replace('%', '').replace('_', '')
+    
+    # If sanitization results in empty string (user searched only wildcards), redirect to index
+    if not sanitized_query:
+        return redirect(url_for('index'))
+    
     # Search in product name, description, and category
     products = Product.query.filter(
         db.or_(
