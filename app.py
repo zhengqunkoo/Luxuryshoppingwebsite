@@ -178,10 +178,48 @@ def _fallback_advisor_answer(user_question, products):
 
     return None
 
+@app.route('/api/products')
+def get_products():
+    category = request.args.get('category')
+    page = int(request.args.get('page', 1))
+    per_page = int(request.args.get('per_page', 6))
+    
+    query = Product.query
+    if category:
+        query = query.filter_by(category=category)
+    
+    pagination = query.paginate(page=page, per_page=per_page, error_out=False)
+    
+    return jsonify({
+        'products': [{
+            'id': p.id,
+            'name': p.name,
+            'description': p.description,
+            'price': float(p.price),
+            'category': p.category,
+            'image_url': p.image_url,
+            'stock': p.stock
+        } for p in pagination.items],
+        'has_next': pagination.has_next,
+        'page': page,
+        'total': pagination.total
+    })
+
 @app.route('/')
 def index():
-    products = Product.query.all()
-    return render_template('index.html', products=products)
+    # Only get unique categories first
+    categories = [row[0] for row in db.session.query(Product.category).distinct().all()]
+    
+    # Get first 6 products for each category
+    categorized_products = {}
+    for cat in categories:
+        products = Product.query.filter_by(category=cat).limit(6).all()
+        categorized_products[cat] = {
+            'products_list': products,
+            'has_more': Product.query.filter_by(category=cat).count() > 6
+        }
+        
+    return render_template('index.html', categorized_products=categorized_products)
 
 @app.route('/search')
 def search():
@@ -733,6 +771,7 @@ def ask_advisor():
             "- Reference previous conversation when relevant to show continuity\n"
             "- Focus on 1-2 key products that best match the query\n"
             "- Use sophisticated but natural language\n"
+            "- Story-driven: explain WHY a piece is special, not just what it is\n"
             "- Always suggest 1 complementary item with specific styling rationale\n"
             "- End with a specific question to continue conversation\n\n"
             "GUARDRAILS:\n"

@@ -9,11 +9,11 @@ permissions:
   contents: read
 
 env:
-  ACR_NAME: acroslpprod002
+  ACR_NAME: luxuryshoppingacr
   ACR_REPOSITORY: luxury-shopping
-  ACR_LOGIN_SERVER: acroslpprod002.azurecr.io
-  AZURE_RESOURCE_GROUP: rg-oslp-prod-002
-  AZURE_WEBAPP_NAME: app-oslp-prod-002
+  ACR_LOGIN_SERVER: luxuryshoppingacr.azurecr.io
+  AZURE_RESOURCE_GROUP: LuxuryShoppingStudent
+  AZURE_WEBAPP_NAME: luxuryshoppingwebsite
 
 jobs:
   build-and-deploy:
@@ -28,34 +28,15 @@ jobs:
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-      - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v3
-        with:
-          terraform_version: "1.6.0"
-
-      - name: Terraform Init
+      - name: Login to ACR
         run: |
-          cd infrastructure/terraform
-          terraform init
-
-      - name: Terraform Plan
-        run: |
-          cd infrastructure/terraform
-          terraform plan
-
-      - name: Terraform Apply
-        run: |
-          cd infrastructure/terraform
-          terraform apply -auto-approve
+          TOKEN=$(az acr login --name "${{ env.ACR_NAME }}" --expose-token --output tsv --query accessToken)
+          echo "$TOKEN" | docker login "${{ env.ACR_LOGIN_SERVER }}" --username 00000000-0000-0000-0000-000000000000 --password-stdin
 
       - name: Build and push image to ACR
-        uses: azure/cli@v2
-        with:
-          inlineScript: |
-            set -euo pipefail
-            az account show
-            az acr show --name "${{ secrets.ACR_NAME }}" --query "{name:name,loginServer:loginServer,resourceGroup:resourceGroup}" -o json
-            az acr build --registry "${{ secrets.ACR_NAME }}" --image "${{ secrets.ACR_REPOSITORY }}:latest" .
+        run: |
+          docker build -t "${{ env.ACR_LOGIN_SERVER }}/${{ env.ACR_REPOSITORY }}:latest" .
+          docker push "${{ env.ACR_LOGIN_SERVER }}/${{ env.ACR_REPOSITORY }}:latest"
 
       - name: Point Web App to latest image and restart
         uses: azure/cli@v2
@@ -63,7 +44,7 @@ jobs:
           inlineScript: |
             set -euo pipefail
             az account show
-            az webapp show --resource-group "${{ secrets.AZURE_RESOURCE_GROUP }}" --name "${{ secrets.AZURE_WEBAPP_NAME }}" --query "{name:name,resourceGroup:resourceGroup,defaultHostName:defaultHostName}" -o json
+            az webapp show --resource-group "${{ env.AZURE_RESOURCE_GROUP }}" --name "${{ env.AZURE_WEBAPP_NAME }}" --query "{name:name,resourceGroup:resourceGroup,defaultHostName:defaultHostName}" -o json
             az webapp config container set \
               --resource-group "${{ env.AZURE_RESOURCE_GROUP }}" \
               --name "${{ env.AZURE_WEBAPP_NAME }}" \
