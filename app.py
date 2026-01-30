@@ -190,19 +190,20 @@ def search():
     if len(query) > 200:
         query = query[:200]
     
-    if query:
-        # Escape SQL LIKE wildcards to prevent unexpected matching behavior
-        escaped_query = query.replace('%', '\\%').replace('_', '\\_')
-        # Search in product name, description, and category
-        products = Product.query.filter(
-            db.or_(
-                Product.name.ilike(f'%{escaped_query}%'),
-                Product.description.ilike(f'%{escaped_query}%'),
-                Product.category.ilike(f'%{escaped_query}%')
-            )
-        ).all()
-    else:
-        products = Product.query.all()
+    # If the query is empty after stripping/truncation, show the default index view
+    if not query:
+        return redirect(url_for('index'))
+    
+    # Sanitize SQL LIKE wildcards to prevent unexpected matching behavior across backends
+    sanitized_query = query.replace('%', '').replace('_', '')
+    # Search in product name, description, and category
+    products = Product.query.filter(
+        db.or_(
+            Product.name.ilike(f'%{sanitized_query}%'),
+            Product.description.ilike(f'%{sanitized_query}%'),
+            Product.category.ilike(f'%{sanitized_query}%')
+        )
+    ).all()
     return render_template('index.html', products=products, search_query=query)
 
 
