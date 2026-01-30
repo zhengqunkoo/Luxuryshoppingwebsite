@@ -199,9 +199,11 @@ checkov -d . --framework terraform,dockerfile,github_actions
 
 ### OWASP Dependency-Check
 ```bash
-# Download
-wget https://github.com/jeremylong/DependencyCheck/releases/download/v8.4.0/dependency-check-8.4.0-release.zip
-unzip dependency-check-8.4.0-release.zip
+# Download latest version from GitHub releases
+# Visit: https://github.com/jeremylong/DependencyCheck/releases
+wget https://github.com/jeremylong/DependencyCheck/releases/latest/download/dependency-check-*-release.zip || \
+  curl -LO https://github.com/jeremylong/DependencyCheck/releases/latest/download/dependency-check-*-release.zip
+unzip dependency-check-*-release.zip
 
 # Run scan
 ./dependency-check/bin/dependency-check.sh --project "Luxury Shopping" --scan .

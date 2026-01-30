@@ -49,18 +49,15 @@ jobs:
             echo "No test files found, skipping OPA tests"
           fi
 
-      - name: Evaluate Terraform with OPA
+      - name: List Terraform Files for Manual Evaluation
         if: hashFiles('infrastructure/terraform/*.tf') != ''
         run: |
-          echo "Evaluating Terraform files against OPA policies..."
-          cd infrastructure/terraform
-          for tf_file in *.tf; do
-            if [ -f "$tf_file" ]; then
-              echo "Checking $tf_file..."
-              # Convert Terraform to JSON for OPA evaluation
-              cat "$tf_file" || true
-            fi
-          done
+          echo "Terraform files found. For full policy evaluation:"
+          echo "1. Generate Terraform plan as JSON: terraform plan -out=tfplan.binary && terraform show -json tfplan.binary > tfplan.json"
+          echo "2. Evaluate with OPA: opa eval --data policies/security/terraform.rego --input tfplan.json 'data.security.terraform'"
+          echo ""
+          echo "Available Terraform files:"
+          ls -l infrastructure/terraform/*.tf || true
 
       - name: Create Policy Report
         if: success() || failure()

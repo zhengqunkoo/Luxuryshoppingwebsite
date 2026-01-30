@@ -236,6 +236,8 @@ This document provides a quick reference of all security checks performed by the
 #### Checkov
 ```hcl
 # In Terraform file
+# Note: Verify check ID from scan output or Checkov documentation before suppressing
+# List of checks: https://www.checkov.io/5.Policy%20Index/terraform.html
 resource "azurerm_storage_account" "example" {
   #checkov:skip=CKV_AZURE_35:Public access required for CDN
   public_network_access_enabled = true

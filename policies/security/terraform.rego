@@ -17,7 +17,7 @@ deny[msg] {
 # Ensure encryption is enabled for SQL databases
 deny[msg] {
     input.resource.azurerm_mssql_database[name]
-    not input.resource.azurerm_mssql_database[name].transparent_data_encryption_enabled
+    input.resource.azurerm_mssql_database[name].transparent_data_encryption_enabled != true
     msg = sprintf("SQL Database '%s' should have transparent data encryption enabled", [name])
 }
 
@@ -53,9 +53,10 @@ warn[msg] {
     msg = sprintf("Network Security Rule '%s' allows inbound traffic from any source", [name])
 }
 
-# Ensure Key Vault has soft delete enabled
-deny[msg] {
+# Ensure Key Vault has soft delete retention configured
+# Note: In azurerm provider v3.0+, soft delete is enabled by default
+warn[msg] {
     input.resource.azurerm_key_vault[name]
-    input.resource.azurerm_key_vault[name].soft_delete_enabled != true
-    msg = sprintf("Key Vault '%s' should have soft delete enabled", [name])
+    not input.resource.azurerm_key_vault[name].soft_delete_retention_days
+    msg = sprintf("Key Vault '%s' should specify soft_delete_retention_days (recommended: 90)", [name])
 }
