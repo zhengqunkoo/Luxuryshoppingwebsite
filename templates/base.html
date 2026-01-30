@@ -116,7 +116,12 @@
     <div id="chat-window">
         <div class="chat-header">
             <span><i class="fas fa-robot"></i> Lux Advisor</span>
-            <button type="button" class="btn-close btn-close-white" id="chat-close"></button>
+            <div>
+                <a href="{{ url_for('lux_welcome') }}" class="btn btn-sm me-2" id="about-lux-btn" title="Learn more about Lux" style="background: rgba(212, 175, 55, 0.2); color: #d4af37; border: 1px solid #d4af37; border-radius: 5px; padding: 0.25rem 0.5rem;">
+                    <i class="fas fa-info-circle"></i>
+                </a>
+                <button type="button" class="btn-close btn-close-white" id="chat-close"></button>
+            </div>
         </div>
         <div class="chat-body" id="chat-messages">
             <div class="message ai">
