@@ -2,18 +2,26 @@
 name: OWASP ZAP Security Scan
 
 on:
-  workflow_dispatch:
   push:
-    branches:
-      - main
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+  schedule:
+    # Run weekly on Mondays at 00:00 UTC
+    - cron: "0 0 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
 
 jobs:
-  zap_scan_job:
+  zap_scan:
     runs-on: ubuntu-latest
-
+    name: OWASP ZAP Scan
     steps:
-      - name: Checkout source code
-        uses: actions/checkout@v3
+      - name: Checkout
+        uses: actions/checkout@v4
 
       - name: Fix directory permissions
         run: |
