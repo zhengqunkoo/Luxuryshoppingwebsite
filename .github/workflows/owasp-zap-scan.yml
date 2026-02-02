@@ -22,12 +22,17 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Fix directory permissions
+        run: |
+          # Ensure workspace directory is writable by Docker
+          sudo chmod -R 777 ${{ github.workspace }}
+
       - name: ZAP Baseline Scan
         uses: zaproxy/action-baseline@v0.12.0
         with:
           target: 'https://luxuryshoppingwebsite.azurewebsites.net'
           rules_file_name: '.zap/rules.tsv'
-          cmd_options: '-a'
+          cmd_options: '-a -T 300'
           issue_title: 'OWASP ZAP Security Scan Report'
           token: ${{ secrets.GITHUB_TOKEN }}
           fail_action: false
