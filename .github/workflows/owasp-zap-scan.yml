@@ -27,7 +27,7 @@ jobs:
         run: |
           # Ensure workspace directory has proper write permissions
           # The GitHub Actions runner needs write access for the ZAP action
-          chmod -R u+w ${{ github.workspace }}
+          chmod -R u+rwX ${{ github.workspace }}
 
       - name: ZAP Baseline Scan
         uses: zaproxy/action-baseline@v0.12.0
