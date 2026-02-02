@@ -25,7 +25,9 @@ jobs:
       - name: Fix directory permissions
         run: |
           # Ensure workspace directory is writable by Docker
-          sudo chmod -R 777 ${{ github.workspace }}
+          # The ZAP Docker container runs as user 1000, so we need to make
+          # the workspace accessible to that user
+          sudo chown -R 1000:1000 ${{ github.workspace }}
 
       - name: ZAP Baseline Scan
         uses: zaproxy/action-baseline@v0.12.0
