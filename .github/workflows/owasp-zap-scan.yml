@@ -39,3 +39,4 @@ jobs:
           issue_title: 'OWASP ZAP Security Scan Report'
           token: ${{ secrets.GITHUB_TOKEN }}
           fail_action: false
+          artifact_name: 'zap-scan'
