@@ -67,8 +67,9 @@ def add_security_headers(response):
     # Permissions Policy
     response.headers['Permissions-Policy'] = 'geolocation=(), microphone=(), camera=()'
     
-    # Cross-Origin isolation for Spectre protection
-    response.headers['Cross-Origin-Embedder-Policy'] = 'require-corp'
+    # Cross-Origin policies for Spectre protection
+    # Using Cross-Origin-Resource-Policy instead of COEP for better compatibility
+    response.headers['Cross-Origin-Resource-Policy'] = 'same-origin'
     response.headers['Cross-Origin-Opener-Policy'] = 'same-origin'
     
     # Remove server header to avoid version disclosure
