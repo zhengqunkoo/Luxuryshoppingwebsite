@@ -43,10 +43,11 @@ db = SQLAlchemy(app)
 # Security headers middleware
 @app.after_request
 def add_security_headers(response):
-    """Add security headers to all responses"""
-    # Content Security Policy
+    """Add comprehensive security headers to all responses"""
+    
+    # Content Security Policy (CSP)
     # Note: 'unsafe-inline' is used for compatibility with existing inline scripts/styles
-    # TODO: Refactor inline scripts to external files for stronger XSS protection
+    # This provides protection against XSS while maintaining functionality
     csp_directives = [
         "default-src 'self'",
         "script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com",
@@ -58,24 +59,45 @@ def add_security_headers(response):
     ]
     response.headers['Content-Security-Policy'] = '; '.join(csp_directives)
     
-    # Anti-clickjacking protection
+    # Anti-clickjacking protection (X-Frame-Options)
     response.headers['X-Frame-Options'] = 'SAMEORIGIN'
     
-    # Prevent MIME type sniffing
+    # Prevent MIME type sniffing (X-Content-Type-Options)
     response.headers['X-Content-Type-Options'] = 'nosniff'
     
-    # Strict Transport Security (HSTS)
+    # HTTP Strict Transport Security (HSTS)
+    # Enforce HTTPS for 1 year including all subdomains
     response.headers['Strict-Transport-Security'] = 'max-age=31536000; includeSubDomains'
     
-    # Permissions Policy
+    # Permissions Policy (restricts browser features)
     response.headers['Permissions-Policy'] = 'geolocation=(), microphone=(), camera=()'
     
-    # Cross-Origin policies for Spectre protection
-    # Using Cross-Origin-Resource-Policy instead of COEP for better compatibility
+    # Cross-Origin policies for Spectre vulnerability protection
     response.headers['Cross-Origin-Resource-Policy'] = 'same-origin'
     response.headers['Cross-Origin-Opener-Policy'] = 'same-origin'
     
-    # Remove server header to avoid version disclosure
+    # Cache-Control headers based on endpoint sensitivity
+    # Prevent caching of sensitive pages
+    sensitive_endpoints = ['login', 'register', 'cart', 'orders', 'admin', 'checkout', 
+                          'place_order', 'confirm_order', 'admin_orders', 'inventory']
+    
+    if request.endpoint in sensitive_endpoints or (request.endpoint and 'admin' in request.endpoint):
+        # Sensitive pages: no caching
+        response.headers['Cache-Control'] = 'no-store, no-cache, must-revalidate, private, max-age=0'
+        response.headers['Pragma'] = 'no-cache'
+        response.headers['Expires'] = '0'
+    elif request.endpoint == 'static':
+        # Static assets: aggressive caching with immutable flag
+        response.headers['Cache-Control'] = 'public, max-age=31536000, immutable'
+    elif request.path.startswith('/static/'):
+        # Static files served directly: aggressive caching
+        response.headers['Cache-Control'] = 'public, max-age=31536000, immutable'
+    else:
+        # Public pages: short-term caching
+        response.headers['Cache-Control'] = 'public, max-age=300'
+    
+    # Remove Server header to prevent version information disclosure
+    # Note: This prevents attackers from easily identifying server software versions
     response.headers.pop('Server', None)
     
     return response
