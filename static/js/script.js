@@ -127,7 +127,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Stats card enhancements
+    // Statistics card UI enhancements
     const adminStats = document.querySelectorAll('.stats-card');
     adminStats.forEach(card => {
         card.addEventListener('click', function() {
