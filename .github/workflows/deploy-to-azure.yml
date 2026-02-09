@@ -28,6 +28,43 @@ jobs:
         run: terraform init
         working-directory: infrastructure/terraform
 
+      - name: Set Subscription ID
+        run: echo "SUBSCRIPTION_ID=5b12417c-36fe-453a-995f-20d5624f9c58" >> $GITHUB_ENV
+
+      - name: Terraform Remove State Objects
+        run: |
+          terraform state rm azurerm_resource_group.rg || true
+          terraform state rm azurerm_virtual_network.vnet || true
+          terraform state rm azurerm_subnet.compute_subnet || true
+          terraform state rm azurerm_subnet.ingress_subnet || true
+          terraform state rm azurerm_subnet.paas_subnet || true
+          terraform state rm azurerm_container_registry.acr || true
+          terraform state rm azurerm_key_vault.kv || true
+          terraform state rm azurerm_kubernetes_cluster.aks || true
+          terraform state rm azurerm_linux_web_app.web || true
+          terraform state rm azurerm_service_plan.plan || true
+          terraform state rm azurerm_mssql_server.sql || true
+          terraform state rm azurerm_mssql_database.db || true
+          terraform state rm azurerm_role_assignment.aks_acr_pull || true
+        working-directory: infrastructure/terraform
+
+      - name: Terraform Import Resources
+        run: |
+          terraform import azurerm_resource_group.rg /subscriptions/${{ env.SUBSCRIPTION_ID }}/resourceGroups/rg-oslp-prod-003
+          terraform import azurerm_virtual_network.vnet /subscriptions/${{ env.SUBSCRIPTION_ID }}/resourceGroups/rg-oslp-prod-003/providers/Microsoft.Network/virtualNetworks/vnet-oslp-prod-003
+          terraform import azurerm_subnet.compute_subnet /subscriptions/${{ env.SUBSCRIPTION_ID }}/resourceGroups/rg-oslp-prod-003/providers/Microsoft.Network/virtualNetworks/vnet-oslp-prod-003/subnets/snet-compute
+          terraform import azurerm_subnet.ingress_subnet /subscriptions/${{ env.SUBSCRIPTION_ID }}/resourceGroups/rg-oslp-prod-003/providers/Microsoft.Network/virtualNetworks/vnet-oslp-prod-003/subnets/snet-ingress
+          terraform import azurerm_subnet.paas_subnet /subscriptions/${{ env.SUBSCRIPTION_ID }}/resourceGroups/rg-oslp-prod-003/providers/Microsoft.Network/virtualNetworks/vnet-oslp-prod-003/subnets/snet-paas
+          terraform import azurerm_container_registry.acr /subscriptions/${{ env.SUBSCRIPTION_ID }}/resourceGroups/rg-oslp-prod-003/providers/Microsoft.ContainerRegistry/registries/acroslpprod003
+          terraform import azurerm_key_vault.kv /subscriptions/${{ env.SUBSCRIPTION_ID }}/resourceGroups/rg-oslp-prod-003/providers/Microsoft.KeyVault/vaults/kv-oslp-prod-003
+          terraform import azurerm_kubernetes_cluster.aks /subscriptions/${{ env.SUBSCRIPTION_ID }}/resourceGroups/rg-oslp-prod-003/providers/Microsoft.ContainerService/managedClusters/aks-oslp-prod-003
+          terraform import azurerm_linux_web_app.web /subscriptions/${{ env.SUBSCRIPTION_ID }}/resourceGroups/rg-oslp-prod-003/providers/Microsoft.Web/sites/app-oslp-prod-003
+          terraform import azurerm_service_plan.plan /subscriptions/${{ env.SUBSCRIPTION_ID }}/resourceGroups/rg-oslp-prod-003/providers/Microsoft.Web/serverfarms/asp-oslp-prod
+          terraform import azurerm_mssql_server.sql /subscriptions/${{ env.SUBSCRIPTION_ID }}/resourceGroups/rg-oslp-prod-003/providers/Microsoft.Sql/servers/sql-oslp-prod-003
+          terraform import azurerm_mssql_database.db /subscriptions/${{ env.SUBSCRIPTION_ID }}/resourceGroups/rg-oslp-prod-003/providers/Microsoft.Sql/servers/sql-oslp-prod-003/databases/sqldb-oslp-prod
+          terraform import azurerm_role_assignment.aks_acr_pull /subscriptions/${{ env.SUBSCRIPTION_ID }}/resourceGroups/rg-oslp-prod-003/providers/Microsoft.Authorization/roleAssignments/<role-assignment-id>
+        working-directory: infrastructure/terraform
+
       - name: Terraform Apply
         run: terraform apply -auto-approve
         working-directory: infrastructure/terraform
