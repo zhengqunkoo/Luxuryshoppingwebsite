@@ -62,7 +62,7 @@ jobs:
           terraform import azurerm_service_plan.plan /subscriptions/${{ env.SUBSCRIPTION_ID }}/resourceGroups/rg-oslp-prod-003/providers/Microsoft.Web/serverFarms/asp-oslp-prod
           terraform import azurerm_mssql_server.sql /subscriptions/${{ env.SUBSCRIPTION_ID }}/resourceGroups/rg-oslp-prod-003/providers/Microsoft.Sql/servers/sql-oslp-prod-003
           terraform import azurerm_mssql_database.db /subscriptions/${{ env.SUBSCRIPTION_ID }}/resourceGroups/rg-oslp-prod-003/providers/Microsoft.Sql/servers/sql-oslp-prod-003/databases/sqldb-oslp-prod
-          terraform import azurerm_role_assignment.aks_acr_pull /subscriptions/${{ env.SUBSCRIPTION_ID }}/resourceGroups/rg-oslp-prod-003/providers/Microsoft.Authorization/roleAssignments/<role-assignment-id>
+          terraform import azurerm_role_assignment.aks_acr_pull /subscriptions/${{ env.SUBSCRIPTION_ID }}/resourceGroups/rg-oslp-prod-003/providers/Microsoft.ContainerRegistry/roleAssignments/0eb9efe2-8f63-484d-9518-00190671b56a
         working-directory: infrastructure/terraform
 
       - name: Terraform Apply
