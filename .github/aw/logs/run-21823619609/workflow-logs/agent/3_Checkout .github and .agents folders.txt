@@ -1,0 +1,122 @@
+﻿2026-02-09T11:41:17.5979660Z ##[warning]Unexpected input(s) 'depth', valid inputs are ['repository', 'ref', 'token', 'ssh-key', 'ssh-known-hosts', 'ssh-strict', 'ssh-user', 'persist-credentials', 'path', 'clean', 'filter', 'sparse-checkout', 'sparse-checkout-cone-mode', 'fetch-depth', 'fetch-tags', 'show-progress', 'lfs', 'submodules', 'set-safe-directory', 'github-server-url']
+2026-02-09T11:41:17.5995118Z ##[group]Run actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8
+2026-02-09T11:41:17.5995495Z with:
+2026-02-09T11:41:17.5995695Z   sparse-checkout: .github
+.agents
+
+2026-02-09T11:41:17.5995938Z   depth: 1
+2026-02-09T11:41:17.5996123Z   persist-credentials: false
+2026-02-09T11:41:17.5996388Z   repository: zhengqunkoo/Luxuryshoppingwebsite
+2026-02-09T11:41:17.5996827Z   token: ***
+2026-02-09T11:41:17.5997006Z   ssh-strict: true
+2026-02-09T11:41:17.5997193Z   ssh-user: git
+2026-02-09T11:41:17.5997377Z   clean: true
+2026-02-09T11:41:17.5997569Z   sparse-checkout-cone-mode: true
+2026-02-09T11:41:17.5997807Z   fetch-depth: 1
+2026-02-09T11:41:17.5998020Z   fetch-tags: false
+2026-02-09T11:41:17.5998210Z   show-progress: true
+2026-02-09T11:41:17.5998399Z   lfs: false
+2026-02-09T11:41:17.5998559Z   submodules: false
+2026-02-09T11:41:17.5998753Z   set-safe-directory: true
+2026-02-09T11:41:17.5998948Z env:
+2026-02-09T11:41:17.5999106Z   DEFAULT_BRANCH: main
+2026-02-09T11:41:17.5999307Z   GH_AW_ASSETS_ALLOWED_EXTS: 
+2026-02-09T11:41:17.5999514Z   GH_AW_ASSETS_BRANCH: 
+2026-02-09T11:41:17.5999710Z   GH_AW_ASSETS_MAX_SIZE_KB: 0
+2026-02-09T11:41:17.5999965Z   GH_AW_MCP_LOG_DIR: /tmp/gh-aw/mcp-logs/safeoutputs
+2026-02-09T11:41:17.6000305Z   GH_AW_SAFE_OUTPUTS: /opt/gh-aw/safeoutputs/outputs.jsonl
+2026-02-09T11:41:17.6000684Z   GH_AW_SAFE_OUTPUTS_CONFIG_PATH: /opt/gh-aw/safeoutputs/config.json
+2026-02-09T11:41:17.6001083Z   GH_AW_SAFE_OUTPUTS_TOOLS_PATH: /opt/gh-aw/safeoutputs/tools.json
+2026-02-09T11:41:17.6001400Z ##[endgroup]
+2026-02-09T11:41:17.6859078Z Syncing repository: zhengqunkoo/Luxuryshoppingwebsite
+2026-02-09T11:41:17.6860403Z ##[group]Getting Git version info
+2026-02-09T11:41:17.6860939Z Working directory is '/home/runner/work/Luxuryshoppingwebsite/Luxuryshoppingwebsite'
+2026-02-09T11:41:17.6861601Z [command]/usr/bin/git version
+2026-02-09T11:41:17.6928512Z git version 2.52.0
+2026-02-09T11:41:17.6981259Z ##[endgroup]
+2026-02-09T11:41:17.6995886Z Temporarily overriding HOME='/home/runner/work/_temp/8bcb535d-c102-4378-8ef8-7262217277d2' before making global git config changes
+2026-02-09T11:41:17.6997502Z Adding repository directory to the temporary git global config as a safe directory
+2026-02-09T11:41:17.7001209Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/Luxuryshoppingwebsite/Luxuryshoppingwebsite
+2026-02-09T11:41:17.7043355Z Deleting the contents of '/home/runner/work/Luxuryshoppingwebsite/Luxuryshoppingwebsite'
+2026-02-09T11:41:17.7046815Z ##[group]Initializing the repository
+2026-02-09T11:41:17.7051566Z [command]/usr/bin/git init /home/runner/work/Luxuryshoppingwebsite/Luxuryshoppingwebsite
+2026-02-09T11:41:17.7147992Z hint: Using 'master' as the name for the initial branch. This default branch name
+2026-02-09T11:41:17.7149026Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+2026-02-09T11:41:17.7149806Z hint: to use in all of your new repositories, which will suppress this warning,
+2026-02-09T11:41:17.7150256Z hint: call:
+2026-02-09T11:41:17.7150439Z hint:
+2026-02-09T11:41:17.7150767Z hint: 	git config --global init.defaultBranch <name>
+2026-02-09T11:41:17.7151102Z hint:
+2026-02-09T11:41:17.7151452Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2026-02-09T11:41:17.7152230Z hint: 'development'. The just-created branch can be renamed via this command:
+2026-02-09T11:41:17.7152884Z hint:
+2026-02-09T11:41:17.7153199Z hint: 	git branch -m <name>
+2026-02-09T11:41:17.7153560Z hint:
+2026-02-09T11:41:17.7154556Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2026-02-09T11:41:17.7155668Z Initialized empty Git repository in /home/runner/work/Luxuryshoppingwebsite/Luxuryshoppingwebsite/.git/
+2026-02-09T11:41:17.7164173Z [command]/usr/bin/git remote add origin https://github.com/zhengqunkoo/Luxuryshoppingwebsite
+2026-02-09T11:41:17.7199613Z ##[endgroup]
+2026-02-09T11:41:17.7200250Z ##[group]Disabling automatic garbage collection
+2026-02-09T11:41:17.7203619Z [command]/usr/bin/git config --local gc.auto 0
+2026-02-09T11:41:17.7229994Z ##[endgroup]
+2026-02-09T11:41:17.7230485Z ##[group]Setting up auth
+2026-02-09T11:41:17.7231584Z Removing SSH command configuration
+2026-02-09T11:41:17.7237612Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-02-09T11:41:17.7268168Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-02-09T11:41:17.7589998Z Removing HTTP extra header
+2026-02-09T11:41:17.7595657Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-02-09T11:41:17.7626176Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-02-09T11:41:17.7835504Z Removing includeIf entries pointing to credentials config files
+2026-02-09T11:41:17.7842340Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-02-09T11:41:17.7874553Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-02-09T11:41:17.8099727Z [command]/usr/bin/git config --file /home/runner/work/_temp/git-credentials-70904298-cf15-4158-be8b-d25445e41049.config http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2026-02-09T11:41:17.8142078Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/Luxuryshoppingwebsite/Luxuryshoppingwebsite/.git.path /home/runner/work/_temp/git-credentials-70904298-cf15-4158-be8b-d25445e41049.config
+2026-02-09T11:41:17.8173491Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/Luxuryshoppingwebsite/Luxuryshoppingwebsite/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-70904298-cf15-4158-be8b-d25445e41049.config
+2026-02-09T11:41:17.8203373Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-70904298-cf15-4158-be8b-d25445e41049.config
+2026-02-09T11:41:17.8233570Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-70904298-cf15-4158-be8b-d25445e41049.config
+2026-02-09T11:41:17.8258578Z ##[endgroup]
+2026-02-09T11:41:17.8259174Z ##[group]Fetching the repository
+2026-02-09T11:41:17.8268253Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --filter=blob:none --depth=1 origin +682d22ae6e93dc172f63d3a1d55a3645d3ddae8c:refs/remotes/origin/main
+2026-02-09T11:41:18.0172188Z From https://github.com/zhengqunkoo/Luxuryshoppingwebsite
+2026-02-09T11:41:18.0173201Z  * [new ref]         682d22ae6e93dc172f63d3a1d55a3645d3ddae8c -> origin/main
+2026-02-09T11:41:18.0207942Z ##[endgroup]
+2026-02-09T11:41:18.0208597Z ##[group]Determining the checkout info
+2026-02-09T11:41:18.0211162Z ##[endgroup]
+2026-02-09T11:41:18.0211804Z ##[group]Setting up sparse checkout
+2026-02-09T11:41:18.0218228Z [command]/usr/bin/git sparse-checkout set .github .agents
+2026-02-09T11:41:18.0260501Z ##[endgroup]
+2026-02-09T11:41:18.0261060Z ##[group]Checking out the ref
+2026-02-09T11:41:18.0265351Z [command]/usr/bin/git checkout --progress --force -B main refs/remotes/origin/main
+2026-02-09T11:41:18.1937940Z Switched to a new branch 'main'
+2026-02-09T11:41:18.1939118Z branch 'main' set up to track 'origin/main'.
+2026-02-09T11:41:18.1947177Z ##[endgroup]
+2026-02-09T11:41:18.1999265Z [command]/usr/bin/git log -1 --format=%H
+2026-02-09T11:41:18.2035478Z 682d22ae6e93dc172f63d3a1d55a3645d3ddae8c
+2026-02-09T11:41:18.2047566Z ##[group]Removing auth
+2026-02-09T11:41:18.2050157Z Removing SSH command configuration
+2026-02-09T11:41:18.2053448Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-02-09T11:41:18.2094525Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-02-09T11:41:18.2384481Z Removing HTTP extra header
+2026-02-09T11:41:18.2388881Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-02-09T11:41:18.2421819Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-02-09T11:41:18.2655336Z Removing includeIf entries pointing to credentials config files
+2026-02-09T11:41:18.2661203Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-02-09T11:41:18.2687207Z includeif.gitdir:/home/runner/work/Luxuryshoppingwebsite/Luxuryshoppingwebsite/.git.path
+2026-02-09T11:41:18.2688947Z includeif.gitdir:/home/runner/work/Luxuryshoppingwebsite/Luxuryshoppingwebsite/.git/worktrees/*.path
+2026-02-09T11:41:18.2690069Z includeif.gitdir:/github/workspace/.git.path
+2026-02-09T11:41:18.2690700Z includeif.gitdir:/github/workspace/.git/worktrees/*.path
+2026-02-09T11:41:18.2697603Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/Luxuryshoppingwebsite/Luxuryshoppingwebsite/.git.path
+2026-02-09T11:41:18.2719898Z /home/runner/work/_temp/git-credentials-70904298-cf15-4158-be8b-d25445e41049.config
+2026-02-09T11:41:18.2731271Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/Luxuryshoppingwebsite/Luxuryshoppingwebsite/.git.path /home/runner/work/_temp/git-credentials-70904298-cf15-4158-be8b-d25445e41049.config
+2026-02-09T11:41:18.2764901Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/Luxuryshoppingwebsite/Luxuryshoppingwebsite/.git/worktrees/*.path
+2026-02-09T11:41:18.2786348Z /home/runner/work/_temp/git-credentials-70904298-cf15-4158-be8b-d25445e41049.config
+2026-02-09T11:41:18.2798247Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/Luxuryshoppingwebsite/Luxuryshoppingwebsite/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-70904298-cf15-4158-be8b-d25445e41049.config
+2026-02-09T11:41:18.2833065Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git.path
+2026-02-09T11:41:18.2856643Z /github/runner_temp/git-credentials-70904298-cf15-4158-be8b-d25445e41049.config
+2026-02-09T11:41:18.2868364Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-70904298-cf15-4158-be8b-d25445e41049.config
+2026-02-09T11:41:18.2910118Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git/worktrees/*.path
+2026-02-09T11:41:18.2933127Z /github/runner_temp/git-credentials-70904298-cf15-4158-be8b-d25445e41049.config
+2026-02-09T11:41:18.2944407Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-70904298-cf15-4158-be8b-d25445e41049.config
+2026-02-09T11:41:18.2983718Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-02-09T11:41:18.3212144Z Removing credentials config '/home/runner/work/_temp/git-credentials-70904298-cf15-4158-be8b-d25445e41049.config'
+2026-02-09T11:41:18.3220484Z ##[endgroup]

@@ -1,0 +1,30 @@
+﻿2026-02-09T11:41:37.6606878Z ##[group]Run actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd
+2026-02-09T11:41:37.6607311Z with:
+2026-02-09T11:41:37.6608105Z   script: const { setupGlobals } = require('/opt/gh-aw/actions/setup_globals.cjs');
+setupGlobals(core, github, context, exec, io);
+const { main } = require('/opt/gh-aw/actions/interpolate_prompt.cjs');
+await main();
+
+2026-02-09T11:41:37.6609286Z   github-token: ***
+2026-02-09T11:41:37.6609487Z   debug: false
+2026-02-09T11:41:37.6609688Z   user-agent: actions/github-script
+2026-02-09T11:41:37.6609944Z   result-encoding: json
+2026-02-09T11:41:37.6610138Z   retries: 0
+2026-02-09T11:41:37.6610352Z   retry-exempt-status-codes: 400,401,403,404,422
+2026-02-09T11:41:37.6610634Z env:
+2026-02-09T11:41:37.6610797Z   DEFAULT_BRANCH: main
+2026-02-09T11:41:37.6611000Z   GH_AW_ASSETS_ALLOWED_EXTS: 
+2026-02-09T11:41:37.6611225Z   GH_AW_ASSETS_BRANCH: 
+2026-02-09T11:41:37.6611432Z   GH_AW_ASSETS_MAX_SIZE_KB: 0
+2026-02-09T11:41:37.6611695Z   GH_AW_MCP_LOG_DIR: /tmp/gh-aw/mcp-logs/safeoutputs
+2026-02-09T11:41:37.6612090Z   GH_AW_SAFE_OUTPUTS: /opt/gh-aw/safeoutputs/outputs.jsonl
+2026-02-09T11:41:37.6612500Z   GH_AW_SAFE_OUTPUTS_CONFIG_PATH: /opt/gh-aw/safeoutputs/config.json
+2026-02-09T11:41:37.6612941Z   GH_AW_SAFE_OUTPUTS_TOOLS_PATH: /opt/gh-aw/safeoutputs/tools.json
+2026-02-09T11:41:37.6613327Z   GH_AW_PROMPT: /tmp/gh-aw/aw-prompts/prompt.txt
+2026-02-09T11:41:37.6613620Z ##[endgroup]
+2026-02-09T11:41:37.7337394Z Processing runtime import macros (files and URLs)
+2026-02-09T11:41:37.7348422Z ##[warning]File workflows/daily-repo-status.md contains front matter which will be ignored in runtime import
+2026-02-09T11:41:37.7349907Z Runtime imports processed successfully
+2026-02-09T11:41:37.7354275Z No expression variables found, skipping interpolation
+2026-02-09T11:41:37.7354926Z Processing conditional template blocks
+2026-02-09T11:41:37.7357663Z Template rendered successfully

@@ -1,0 +1,178 @@
+[WARN] ⚠️  Using --env-all: All host environment variables will be passed to container
+[WARN]    This may expose sensitive credentials if logs or configs are shared
+[WARN] ⚠️  Host access enabled with host.docker.internal in allowed domains
+[WARN]    Containers can access ANY service running on the host machine
+[WARN]    Only use this for trusted workloads (e.g., MCP gateways)
+[INFO] Allowed domains: api.business.githubcopilot.com, api.enterprise.githubcopilot.com, api.github.com, api.githubcopilot.com, api.individual.githubcopilot.com, api.snapcraft.io, archive.ubuntu.com, azure.archive.ubuntu.com, crl.geotrust.com, crl.globalsign.com, crl.identrust.com, crl.sectigo.com, crl.thawte.com, crl.usertrust.com, crl.verisign.com, crl3.digicert.com, crl4.digicert.com, crls.ssl.com, github.com, host.docker.internal, json-schema.org, json.schemastore.org, keyserver.ubuntu.com, ocsp.digicert.com, ocsp.geotrust.com, ocsp.globalsign.com, ocsp.identrust.com, ocsp.sectigo.com, ocsp.ssl.com, ocsp.thawte.com, ocsp.usertrust.com, ocsp.verisign.com, packagecloud.io, packages.cloud.google.com, packages.microsoft.com, ppa.launchpad.net, raw.githubusercontent.com, registry.npmjs.org, s.symcb.com, s.symcd.com, security.ubuntu.com, telemetry.enterprise.githubcopilot.com, ts-crl.ws.symantec.com, ts-ocsp.ws.symantec.com
+[INFO] Setting up host-level firewall network and iptables rules...
+[SUCCESS] Created network 'awf-net' with bridge 'fw-bridge'
+[INFO] Setting up host-level iptables rules...
+[SUCCESS] Host-level iptables rules configured successfully
+[INFO] Generating configuration files...
+[INFO] Starting containers...
+ Container awf-squid  Creating
+ Container awf-squid  Created
+ Container awf-agent  Creating
+ Container awf-agent  Created
+ Container awf-squid  Starting
+ Container awf-squid  Started
+ Container awf-squid  Waiting
+ Container awf-squid  Healthy
+ Container awf-agent  Starting
+ Container awf-agent  Started
+[SUCCESS] Containers started successfully
+[INFO] Executing agent command...
+[entrypoint] Agentic Workflow Firewall - Agent Container
+[entrypoint] ==================================
+[entrypoint] Adjusting awfuser UID:GID from 1000:1000 to 1001:1001
+[entrypoint] UID/GID adjustment complete
+[entrypoint] Configuring DNS...
+[entrypoint] DNS configured with Docker embedded DNS (127.0.0.11) and trusted servers: 8.8.8.8,8.8.4.4
+[iptables] Setting up NAT redirection to Squid proxy...
+[iptables] NOTE: Host-level DOCKER-USER chain handles egress filtering for all containers on this network
+[iptables] ip6tables is available
+[iptables] Squid proxy: squid-proxy:3128
+[iptables] Squid IP resolved to: 172.30.0.10
+[iptables] Allow localhost traffic...
+[iptables] Configuring DNS rules for trusted servers: 8.8.8.8,8.8.4.4
+[iptables]   IPv4 DNS servers: 8.8.8.8 8.8.4.4
+[iptables]   IPv6 DNS servers: none
+[iptables] Allow DNS to trusted IPv4 server: 8.8.8.8
+[iptables] Allow DNS to trusted IPv4 server: 8.8.4.4
+[iptables] Allow DNS to Docker embedded DNS (127.0.0.11)...
+[iptables] Allow traffic to trusted DNS servers...
+[iptables] Allow traffic to Squid proxy (172.30.0.10:3128)...
+[iptables] Allow direct traffic to host gateway (172.17.0.1) - bypassing Squid...
+[iptables] Allow direct traffic to network gateway (172.30.0.1) - bypassing Squid...
+[iptables] Configuring NAT blacklist for dangerous ports...
+[iptables] NAT blacklist applied for 15 dangerous ports
+[iptables] Redirect HTTP (80) and HTTPS (443) to Squid...
+[iptables] No additional ports specified (only 80, 443 allowed)
+[iptables] Configuring OUTPUT filter chain rules...
+[iptables] Drop all non-redirected TCP traffic (default deny)...
+[iptables] NAT rules applied successfully
+[iptables] Current IPv4 NAT OUTPUT rules:
+Chain OUTPUT (policy ACCEPT 2 packets, 132 bytes)
+ pkts bytes target     prot opt in     out     source               destination         
+    1    66 RETURN     all  --  *      lo      0.0.0.0/0            0.0.0.0/0           
+    0     0 RETURN     all  --  *      *       0.0.0.0/0            127.0.0.0/8         
+    1    66 RETURN     udp  --  *      *       0.0.0.0/0            8.8.8.8              udp dpt:53
+    0     0 RETURN     tcp  --  *      *       0.0.0.0/0            8.8.8.8              tcp dpt:53
+    0     0 RETURN     udp  --  *      *       0.0.0.0/0            8.8.4.4              udp dpt:53
+    0     0 RETURN     tcp  --  *      *       0.0.0.0/0            8.8.4.4              tcp dpt:53
+    0     0 RETURN     udp  --  *      *       0.0.0.0/0            127.0.0.11           udp dpt:53
+    0     0 RETURN     tcp  --  *      *       0.0.0.0/0            127.0.0.11           tcp dpt:53
+    0     0 RETURN     all  --  *      *       0.0.0.0/0            8.8.8.8             
+    0     0 RETURN     all  --  *      *       0.0.0.0/0            8.8.4.4             
+    0     0 RETURN     all  --  *      *       0.0.0.0/0            172.30.0.10         
+    0     0 RETURN     all  --  *      *       0.0.0.0/0            172.17.0.1          
+    0     0 RETURN     all  --  *      *       0.0.0.0/0            172.30.0.1          
+    0     0 RETURN     tcp  --  *      *       0.0.0.0/0            0.0.0.0/0            tcp dpt:22
+    0     0 RETURN     tcp  --  *      *       0.0.0.0/0            0.0.0.0/0            tcp dpt:23
+    0     0 RETURN     tcp  --  *      *       0.0.0.0/0            0.0.0.0/0            tcp dpt:25
+    0     0 RETURN     tcp  --  *      *       0.0.0.0/0            0.0.0.0/0            tcp dpt:110
+    0     0 RETURN     tcp  --  *      *       0.0.0.0/0            0.0.0.0/0            tcp dpt:143
+    0     0 RETURN     tcp  --  *      *       0.0.0.0/0            0.0.0.0/0            tcp dpt:445
+    0     0 RETURN     tcp  --  *      *       0.0.0.0/0            0.0.0.0/0            tcp dpt:1433
+    0     0 RETURN     tcp  --  *      *       0.0.0.0/0            0.0.0.0/0            tcp dpt:1521
+    0     0 RETURN     tcp  --  *      *       0.0.0.0/0            0.0.0.0/0            tcp dpt:3306
+    0     0 RETURN     tcp  --  *      *       0.0.0.0/0            0.0.0.0/0            tcp dpt:3389
+    0     0 RETURN     tcp  --  *      *       0.0.0.0/0            0.0.0.0/0            tcp dpt:5432
+    0     0 RETURN     tcp  --  *      *       0.0.0.0/0            0.0.0.0/0            tcp dpt:6379
+    0     0 RETURN     tcp  --  *      *       0.0.0.0/0            0.0.0.0/0            tcp dpt:27017
+    0     0 RETURN     tcp  --  *      *       0.0.0.0/0            0.0.0.0/0            tcp dpt:27018
+    0     0 RETURN     tcp  --  *      *       0.0.0.0/0            0.0.0.0/0            tcp dpt:28017
+    0     0 DNAT       tcp  --  *      *       0.0.0.0/0            0.0.0.0/0            tcp dpt:80 to:172.30.0.10:3128
+    0     0 DNAT       tcp  --  *      *       0.0.0.0/0            0.0.0.0/0            tcp dpt:443 to:172.30.0.10:3128
+[iptables] Current IPv6 NAT OUTPUT rules:
+Chain OUTPUT (policy ACCEPT 0 packets, 0 bytes)
+ pkts bytes target     prot opt in     out     source               destination         
+    0     0 RETURN     all      *      lo      ::/0                 ::/0                
+    0     0 RETURN     all      *      *       ::/0                 ::1                 
+[entrypoint] Proxy configuration:
+[entrypoint]   HTTP_PROXY=http://172.30.0.10:3128
+[entrypoint]   HTTPS_PROXY=http://172.30.0.10:3128
+[entrypoint] Network information:
+[entrypoint]   IP address: 172.30.0.20 
+[entrypoint]   Hostname: e32a52e996c6
+[entrypoint] ==================================
+[entrypoint] Chroot mode enabled - dropping CAP_NET_ADMIN and CAP_SYS_CHROOT
+[entrypoint] Switching to awfuser (UID: 1001, GID: 1001)
+[entrypoint] Executing command: /bin/bash -c /usr/local/bin/copilot --add-dir /tmp/gh-aw/ --log-level all --log-dir /tmp/gh-aw/sandbox/agent/logs/ --add-dir "${GITHUB_WORKSPACE}" --disable-builtin-mcps --allow-all-tools --allow-all-paths --share /tmp/gh-aw/sandbox/agent/logs/conversation.md --prompt "$(cat /tmp/gh-aw/aw-prompts/prompt.txt)"${GH_AW_MODEL_AGENT_COPILOT:+ --model "$GH_AW_MODEL_AGENT_COPILOT"}
+
+[entrypoint] Chroot mode: running command inside host filesystem (/host)
+[entrypoint] DNS configuration created in chroot (/host/etc/resolv.conf)
+[entrypoint] Chroot working directory: /home/runner/work/Luxuryshoppingwebsite/Luxuryshoppingwebsite
+[entrypoint] Running as host user: runner (UID: 1001)
+[entrypoint] Using host PATH for chroot
+[entrypoint] Adding JAVA_HOME/bin to PATH: /usr/lib/jvm/temurin-17-jdk-amd64/bin
+[entrypoint] DNS configuration will be removed on exit
+
+402 You have no quota
+
+Total usage est:        0 Premium requests
+API time spent:         0s
+Total session time:     2s
+Total code changes:     +0 -0
+Session exported to: /tmp/gh-aw/sandbox/agent/logs/conversation.md
+[WARN] Firewall blocked domains:
+[WARN]   - Blocked: telemetry.individual.githubcopilot.com:443 (domain not in allowlist)
+[WARN] Allowed domains:
+[WARN]   - Allowed: api.business.githubcopilot.com
+[WARN]   - Allowed: api.enterprise.githubcopilot.com
+[WARN]   - Allowed: api.github.com
+[WARN]   - Allowed: api.githubcopilot.com
+[WARN]   - Allowed: api.individual.githubcopilot.com
+[WARN]   - Allowed: api.snapcraft.io
+[WARN]   - Allowed: archive.ubuntu.com
+[WARN]   - Allowed: azure.archive.ubuntu.com
+[WARN]   - Allowed: crl.geotrust.com
+[WARN]   - Allowed: crl.globalsign.com
+[WARN]   - Allowed: crl.identrust.com
+[WARN]   - Allowed: crl.sectigo.com
+[WARN]   - Allowed: crl.thawte.com
+[WARN]   - Allowed: crl.usertrust.com
+[WARN]   - Allowed: crl.verisign.com
+[WARN]   - Allowed: crl3.digicert.com
+[WARN]   - Allowed: crl4.digicert.com
+[WARN]   - Allowed: crls.ssl.com
+[WARN]   - Allowed: github.com
+[WARN]   - Allowed: host.docker.internal
+[WARN]   - Allowed: json-schema.org
+[WARN]   - Allowed: json.schemastore.org
+[WARN]   - Allowed: keyserver.ubuntu.com
+[WARN]   - Allowed: ocsp.digicert.com
+[WARN]   - Allowed: ocsp.geotrust.com
+[WARN]   - Allowed: ocsp.globalsign.com
+[WARN]   - Allowed: ocsp.identrust.com
+[WARN]   - Allowed: ocsp.sectigo.com
+[WARN]   - Allowed: ocsp.ssl.com
+[WARN]   - Allowed: ocsp.thawte.com
+[WARN]   - Allowed: ocsp.usertrust.com
+[WARN]   - Allowed: ocsp.verisign.com
+[WARN]   - Allowed: packagecloud.io
+[WARN]   - Allowed: packages.cloud.google.com
+[WARN]   - Allowed: packages.microsoft.com
+[WARN]   - Allowed: ppa.launchpad.net
+[WARN]   - Allowed: raw.githubusercontent.com
+[WARN]   - Allowed: registry.npmjs.org
+[WARN]   - Allowed: s.symcb.com
+[WARN]   - Allowed: s.symcd.com
+[WARN]   - Allowed: security.ubuntu.com
+[WARN]   - Allowed: telemetry.enterprise.githubcopilot.com
+[WARN]   - Allowed: ts-crl.ws.symantec.com
+[WARN]   - Allowed: ts-ocsp.ws.symantec.com
+[WARN] To fix domain issues: --allow-domains "api.business.githubcopilot.com,api.enterprise.githubcopilot.com,api.github.com,api.githubcopilot.com,api.individual.githubcopilot.com,api.snapcraft.io,archive.ubuntu.com,azure.archive.ubuntu.com,crl.geotrust.com,crl.globalsign.com,crl.identrust.com,crl.sectigo.com,crl.thawte.com,crl.usertrust.com,crl.verisign.com,crl3.digicert.com,crl4.digicert.com,crls.ssl.com,github.com,host.docker.internal,json-schema.org,json.schemastore.org,keyserver.ubuntu.com,ocsp.digicert.com,ocsp.geotrust.com,ocsp.globalsign.com,ocsp.identrust.com,ocsp.sectigo.com,ocsp.ssl.com,ocsp.thawte.com,ocsp.usertrust.com,ocsp.verisign.com,packagecloud.io,packages.cloud.google.com,packages.microsoft.com,ppa.launchpad.net,raw.githubusercontent.com,registry.npmjs.org,s.symcb.com,s.symcd.com,security.ubuntu.com,telemetry.enterprise.githubcopilot.com,ts-crl.ws.symantec.com,ts-ocsp.ws.symantec.com,telemetry.individual.githubcopilot.com"
+[INFO] Stopping containers...
+ Container awf-agent  Stopping
+ Container awf-agent  Stopped
+ Container awf-agent  Removing
+ Container awf-agent  Removed
+ Container awf-squid  Stopping
+ Container awf-squid  Stopped
+ Container awf-squid  Removing
+ Container awf-squid  Removed
+[SUCCESS] Containers stopped successfully
+[INFO] Squid logs available at: /tmp/gh-aw/sandbox/firewall/logs
+[WARN] Command completed with exit code: 1
+Process exiting with code: 1

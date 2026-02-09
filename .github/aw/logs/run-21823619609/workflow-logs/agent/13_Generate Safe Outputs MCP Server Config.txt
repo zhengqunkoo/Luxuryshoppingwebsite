@@ -1,0 +1,28 @@
+﻿2026-02-09T11:41:31.1098418Z ##[group]Run # Generate a secure random API key (360 bits of entropy, 40+ chars)
+2026-02-09T11:41:31.1098983Z [36;1m# Generate a secure random API key (360 bits of entropy, 40+ chars)[0m
+2026-02-09T11:41:31.1099347Z [36;1mAPI_KEY=""[0m
+2026-02-09T11:41:31.1099613Z [36;1mAPI_KEY=$(openssl rand -base64 45 | tr -d '/+=')[0m
+2026-02-09T11:41:31.1099928Z [36;1mPORT=3001[0m
+2026-02-09T11:41:31.1100108Z [36;1m[0m
+2026-02-09T11:41:31.1100343Z [36;1m# Register API key as secret to mask it from logs[0m
+2026-02-09T11:41:31.1100657Z [36;1mecho "::add-mask::${API_KEY}"[0m
+2026-02-09T11:41:31.1100889Z [36;1m[0m
+2026-02-09T11:41:31.1101074Z [36;1m# Set outputs for next steps[0m
+2026-02-09T11:41:31.1101305Z [36;1m{[0m
+2026-02-09T11:41:31.1101514Z [36;1m  echo "safe_outputs_api_key=${API_KEY}"[0m
+2026-02-09T11:41:31.1101811Z [36;1m  echo "safe_outputs_port=${PORT}"[0m
+2026-02-09T11:41:31.1102069Z [36;1m} >> "$GITHUB_OUTPUT"[0m
+2026-02-09T11:41:31.1102285Z [36;1m[0m
+2026-02-09T11:41:31.1102532Z [36;1mecho "Safe Outputs MCP server will run on port ${PORT}"[0m
+2026-02-09T11:41:31.1131191Z shell: /usr/bin/bash -e {0}
+2026-02-09T11:41:31.1131416Z env:
+2026-02-09T11:41:31.1131588Z   DEFAULT_BRANCH: main
+2026-02-09T11:41:31.1131799Z   GH_AW_ASSETS_ALLOWED_EXTS: 
+2026-02-09T11:41:31.1132022Z   GH_AW_ASSETS_BRANCH: 
+2026-02-09T11:41:31.1132219Z   GH_AW_ASSETS_MAX_SIZE_KB: 0
+2026-02-09T11:41:31.1132483Z   GH_AW_MCP_LOG_DIR: /tmp/gh-aw/mcp-logs/safeoutputs
+2026-02-09T11:41:31.1132836Z   GH_AW_SAFE_OUTPUTS: /opt/gh-aw/safeoutputs/outputs.jsonl
+2026-02-09T11:41:31.1133222Z   GH_AW_SAFE_OUTPUTS_CONFIG_PATH: /opt/gh-aw/safeoutputs/config.json
+2026-02-09T11:41:31.1133621Z   GH_AW_SAFE_OUTPUTS_TOOLS_PATH: /opt/gh-aw/safeoutputs/tools.json
+2026-02-09T11:41:31.1134166Z ##[endgroup]
+2026-02-09T11:41:31.1223436Z Safe Outputs MCP server will run on port 3001

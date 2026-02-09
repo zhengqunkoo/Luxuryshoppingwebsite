@@ -1,0 +1,21 @@
+﻿2026-02-09T11:42:17.3679186Z ##[group]Run actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd
+2026-02-09T11:42:17.3680571Z with:
+2026-02-09T11:42:17.3682356Z   github-token: ***
+2026-02-09T11:42:17.3683684Z   script: const { setupGlobals } = require('/opt/gh-aw/actions/setup_globals.cjs');
+setupGlobals(core, github, context, exec, io);
+const { main } = require('/opt/gh-aw/actions/noop.cjs');
+await main();
+
+2026-02-09T11:42:17.3686795Z   debug: false
+2026-02-09T11:42:17.3687222Z   user-agent: actions/github-script
+2026-02-09T11:42:17.3687840Z   result-encoding: json
+2026-02-09T11:42:17.3688264Z   retries: 0
+2026-02-09T11:42:17.3691581Z   retry-exempt-status-codes: 400,401,403,404,422
+2026-02-09T11:42:17.3692193Z env:
+2026-02-09T11:42:17.3692694Z   GH_AW_AGENT_OUTPUT: /tmp/gh-aw/safeoutputs/agent_output.json
+2026-02-09T11:42:17.3695738Z   GH_AW_NOOP_MAX: 1
+2026-02-09T11:42:17.3696264Z   GH_AW_WORKFLOW_NAME: Daily Repo Status
+2026-02-09T11:42:17.3697246Z   GH_AW_WORKFLOW_SOURCE: githubnext/agentics/workflows/daily-repo-status.md@e43596e069e74a65cd7d93315091672d278c2642
+2026-02-09T11:42:17.3699951Z   GH_AW_WORKFLOW_SOURCE_URL: https://github.com/githubnext/agentics/tree/e43596e069e74a65cd7d93315091672d278c2642/workflows/daily-repo-status.md
+2026-02-09T11:42:17.3701485Z ##[endgroup]
+2026-02-09T11:42:17.7456766Z Error reading agent output file: ENOENT: no such file or directory, open '/tmp/gh-aw/safeoutputs/agent_output.json'

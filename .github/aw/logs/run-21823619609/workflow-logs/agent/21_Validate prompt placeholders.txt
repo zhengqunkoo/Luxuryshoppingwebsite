@@ -1,0 +1,20 @@
+﻿2026-02-09T11:41:37.7451299Z ##[group]Run bash /opt/gh-aw/actions/validate_prompt_placeholders.sh
+2026-02-09T11:41:37.7451839Z [36;1mbash /opt/gh-aw/actions/validate_prompt_placeholders.sh[0m
+2026-02-09T11:41:37.7483564Z shell: /usr/bin/bash -e {0}
+2026-02-09T11:41:37.7483818Z env:
+2026-02-09T11:41:37.7484408Z   DEFAULT_BRANCH: main
+2026-02-09T11:41:37.7484662Z   GH_AW_ASSETS_ALLOWED_EXTS: 
+2026-02-09T11:41:37.7484906Z   GH_AW_ASSETS_BRANCH: 
+2026-02-09T11:41:37.7485148Z   GH_AW_ASSETS_MAX_SIZE_KB: 0
+2026-02-09T11:41:37.7485446Z   GH_AW_MCP_LOG_DIR: /tmp/gh-aw/mcp-logs/safeoutputs
+2026-02-09T11:41:37.7485843Z   GH_AW_SAFE_OUTPUTS: /opt/gh-aw/safeoutputs/outputs.jsonl
+2026-02-09T11:41:37.7486278Z   GH_AW_SAFE_OUTPUTS_CONFIG_PATH: /opt/gh-aw/safeoutputs/config.json
+2026-02-09T11:41:37.7486738Z   GH_AW_SAFE_OUTPUTS_TOOLS_PATH: /opt/gh-aw/safeoutputs/tools.json
+2026-02-09T11:41:37.7487137Z   GH_AW_PROMPT: /tmp/gh-aw/aw-prompts/prompt.txt
+2026-02-09T11:41:37.7487437Z ##[endgroup]
+2026-02-09T11:41:37.7549082Z 🔍 Validating prompt placeholders...
+2026-02-09T11:41:37.7618340Z ✅ Placeholder validation complete
+2026-02-09T11:41:37.7618921Z 📊 Prompt statistics:
+2026-02-09T11:41:37.7619336Z    - Lines: 80
+2026-02-09T11:41:37.7619697Z    - Characters: 2809
+2026-02-09T11:41:37.7620080Z    - Words: 355

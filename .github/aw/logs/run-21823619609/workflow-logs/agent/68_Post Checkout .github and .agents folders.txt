@@ -1,0 +1,17 @@
+﻿2026-02-09T11:42:01.9504544Z ##[warning]Unexpected input(s) 'depth', valid inputs are ['repository', 'ref', 'token', 'ssh-key', 'ssh-known-hosts', 'ssh-strict', 'ssh-user', 'persist-credentials', 'path', 'clean', 'filter', 'sparse-checkout', 'sparse-checkout-cone-mode', 'fetch-depth', 'fetch-tags', 'show-progress', 'lfs', 'submodules', 'set-safe-directory', 'github-server-url']
+2026-02-09T11:42:01.9509617Z Post job cleanup.
+2026-02-09T11:42:02.0298189Z [command]/usr/bin/git version
+2026-02-09T11:42:02.0366234Z git version 2.52.0
+2026-02-09T11:42:02.0398491Z Copying '/home/runner/.gitconfig' to '/home/runner/work/_temp/133a658a-98c0-4810-8dc5-a31d31cf423e/.gitconfig'
+2026-02-09T11:42:02.0407740Z Temporarily overriding HOME='/home/runner/work/_temp/133a658a-98c0-4810-8dc5-a31d31cf423e' before making global git config changes
+2026-02-09T11:42:02.0409158Z Adding repository directory to the temporary git global config as a safe directory
+2026-02-09T11:42:02.0414714Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/Luxuryshoppingwebsite/Luxuryshoppingwebsite
+2026-02-09T11:42:02.0443367Z Removing SSH command configuration
+2026-02-09T11:42:02.0449791Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-02-09T11:42:02.0482136Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-02-09T11:42:02.0698642Z Removing HTTP extra header
+2026-02-09T11:42:02.0703243Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-02-09T11:42:02.0734872Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-02-09T11:42:02.0950858Z Removing includeIf entries pointing to credentials config files
+2026-02-09T11:42:02.0960301Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-02-09T11:42:02.0999081Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url

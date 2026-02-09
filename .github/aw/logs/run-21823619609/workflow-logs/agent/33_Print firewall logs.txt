@@ -1,0 +1,31 @@
+﻿2026-02-09T11:42:01.3061346Z ##[group]Run # Fix permissions on firewall logs so they can be uploaded as artifacts
+2026-02-09T11:42:01.3061596Z [36;1m# Fix permissions on firewall logs so they can be uploaded as artifacts[0m
+2026-02-09T11:42:01.3061739Z [36;1m# AWF runs with sudo, creating files owned by root[0m
+2026-02-09T11:42:01.3061939Z [36;1msudo chmod -R a+r /tmp/gh-aw/sandbox/firewall/logs 2>/dev/null || true[0m
+2026-02-09T11:42:01.3062082Z [36;1mawf logs summary | tee -a "$GITHUB_STEP_SUMMARY"[0m
+2026-02-09T11:42:01.3092271Z shell: /usr/bin/bash -e {0}
+2026-02-09T11:42:01.3092349Z env:
+2026-02-09T11:42:01.3092430Z   DEFAULT_BRANCH: main
+2026-02-09T11:42:01.3092509Z   GH_AW_ASSETS_ALLOWED_EXTS: 
+2026-02-09T11:42:01.3092585Z   GH_AW_ASSETS_BRANCH: 
+2026-02-09T11:42:01.3092659Z   GH_AW_ASSETS_MAX_SIZE_KB: 0
+2026-02-09T11:42:01.3092798Z   GH_AW_MCP_LOG_DIR: /tmp/gh-aw/mcp-logs/safeoutputs
+2026-02-09T11:42:01.3092942Z   GH_AW_SAFE_OUTPUTS: /opt/gh-aw/safeoutputs/outputs.jsonl
+2026-02-09T11:42:01.3093263Z   GH_AW_SAFE_OUTPUTS_CONFIG_PATH: /opt/gh-aw/safeoutputs/config.json
+2026-02-09T11:42:01.3093455Z   GH_AW_SAFE_OUTPUTS_TOOLS_PATH: /opt/gh-aw/safeoutputs/tools.json
+2026-02-09T11:42:01.3093569Z   AWF_LOGS_DIR: /tmp/gh-aw/sandbox/firewall/logs
+2026-02-09T11:42:01.3093641Z ##[endgroup]
+2026-02-09T11:42:01.4401400Z <details>
+2026-02-09T11:42:01.4401864Z <summary>Firewall Activity</summary>
+2026-02-09T11:42:01.4402217Z 
+2026-02-09T11:42:01.4402776Z ▼ 6 requests | 5 allowed | 1 blocked | 4 unique domains
+2026-02-09T11:42:01.4403205Z 
+2026-02-09T11:42:01.4403362Z | Domain | Allowed | Denied |
+2026-02-09T11:42:01.4403780Z |--------|---------|--------|
+2026-02-09T11:42:01.4404396Z | api.individual.githubcopilot.com | 3 | 0 |
+2026-02-09T11:42:01.4404923Z | telemetry.individual.githubcopilot.com | 0 | 1 |
+2026-02-09T11:42:01.4405415Z | api.githubcopilot.com | 1 | 0 |
+2026-02-09T11:42:01.4405818Z | api.github.com | 1 | 0 |
+2026-02-09T11:42:01.4406038Z 
+2026-02-09T11:42:01.4406149Z </details>
+2026-02-09T11:42:01.4406333Z 

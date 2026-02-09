@@ -1,0 +1,14 @@
+﻿2026-02-09T11:41:18.3332793Z ##[group]Run bash /opt/gh-aw/actions/create_gh_aw_tmp_dir.sh
+2026-02-09T11:41:18.3333246Z [36;1mbash /opt/gh-aw/actions/create_gh_aw_tmp_dir.sh[0m
+2026-02-09T11:41:18.3364627Z shell: /usr/bin/bash -e {0}
+2026-02-09T11:41:18.3364870Z env:
+2026-02-09T11:41:18.3365037Z   DEFAULT_BRANCH: main
+2026-02-09T11:41:18.3365261Z   GH_AW_ASSETS_ALLOWED_EXTS: 
+2026-02-09T11:41:18.3365491Z   GH_AW_ASSETS_BRANCH: 
+2026-02-09T11:41:18.3365691Z   GH_AW_ASSETS_MAX_SIZE_KB: 0
+2026-02-09T11:41:18.3365967Z   GH_AW_MCP_LOG_DIR: /tmp/gh-aw/mcp-logs/safeoutputs
+2026-02-09T11:41:18.3366331Z   GH_AW_SAFE_OUTPUTS: /opt/gh-aw/safeoutputs/outputs.jsonl
+2026-02-09T11:41:18.3366740Z   GH_AW_SAFE_OUTPUTS_CONFIG_PATH: /opt/gh-aw/safeoutputs/config.json
+2026-02-09T11:41:18.3367154Z   GH_AW_SAFE_OUTPUTS_TOOLS_PATH: /opt/gh-aw/safeoutputs/tools.json
+2026-02-09T11:41:18.3367469Z ##[endgroup]
+2026-02-09T11:41:18.3452293Z Created /tmp/gh-aw/agent directory for agentic workflow temporary files

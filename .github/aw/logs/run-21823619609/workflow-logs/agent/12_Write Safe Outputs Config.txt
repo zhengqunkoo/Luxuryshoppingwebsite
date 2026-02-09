@@ -1,0 +1,200 @@
+﻿2026-02-09T11:41:31.0838315Z ##[group]Run mkdir -p /opt/gh-aw/safeoutputs
+2026-02-09T11:41:31.0839153Z [36;1mmkdir -p /opt/gh-aw/safeoutputs[0m
+2026-02-09T11:41:31.0839474Z [36;1mmkdir -p /tmp/gh-aw/safeoutputs[0m
+2026-02-09T11:41:31.0839875Z [36;1mmkdir -p /tmp/gh-aw/mcp-logs/safeoutputs[0m
+2026-02-09T11:41:31.0840500Z [36;1mcat > /opt/gh-aw/safeoutputs/config.json << 'EOF'[0m
+2026-02-09T11:41:31.0841259Z [36;1m{"create_issue":{"max":1},"missing_data":{},"missing_tool":{},"noop":{"max":1}}[0m
+2026-02-09T11:41:31.0841910Z [36;1mEOF[0m
+2026-02-09T11:41:31.0842306Z [36;1mcat > /opt/gh-aw/safeoutputs/tools.json << 'EOF'[0m
+2026-02-09T11:41:31.0842805Z [36;1m[[0m
+2026-02-09T11:41:31.0843088Z [36;1m  {[0m
+2026-02-09T11:41:31.0846020Z [36;1m    "description": "Create a new GitHub issue for tracking bugs, feature requests, or tasks. Use this for actionable work items that need assignment, labeling, and status tracking. For reports, announcements, or status updates that don't require task tracking, use create_discussion instead. CONSTRAINTS: Maximum 1 issue(s) can be created. Title will be prefixed with \"[repo-status] \". Labels [report daily-status] will be automatically added.",[0m
+2026-02-09T11:41:31.0849273Z [36;1m    "inputSchema": {[0m
+2026-02-09T11:41:31.0849733Z [36;1m      "additionalProperties": false,[0m
+2026-02-09T11:41:31.0850232Z [36;1m      "properties": {[0m
+2026-02-09T11:41:31.0850496Z [36;1m        "body": {[0m
+2026-02-09T11:41:31.0851319Z [36;1m          "description": "Detailed issue description in Markdown. Do NOT repeat the title as a heading since it already appears as the issue's h1. Include context, reproduction steps, or acceptance criteria as appropriate.",[0m
+2026-02-09T11:41:31.0852170Z [36;1m          "type": "string"[0m
+2026-02-09T11:41:31.0852392Z [36;1m        },[0m
+2026-02-09T11:41:31.0852581Z [36;1m        "labels": {[0m
+2026-02-09T11:41:31.0853058Z [36;1m          "description": "Labels to categorize the issue (e.g., 'bug', 'enhancement'). Labels must exist in the repository.",[0m
+2026-02-09T11:41:31.0853562Z [36;1m          "items": {[0m
+2026-02-09T11:41:31.0853780Z [36;1m            "type": "string"[0m
+2026-02-09T11:41:31.0854277Z [36;1m          },[0m
+2026-02-09T11:41:31.0854600Z [36;1m          "type": "array"[0m
+2026-02-09T11:41:31.0854888Z [36;1m        },[0m
+2026-02-09T11:41:31.0855074Z [36;1m        "parent": {[0m
+2026-02-09T11:41:31.0856023Z [36;1m          "description": "Parent issue number for creating sub-issues. This is the numeric ID from the GitHub URL (e.g., 42 in github.com/owner/repo/issues/42). Can also be a temporary_id (e.g., 'aw_abc123def456') from a previously created issue in the same workflow run.",[0m
+2026-02-09T11:41:31.0857015Z [36;1m          "type": [[0m
+2026-02-09T11:41:31.0857219Z [36;1m            "number",[0m
+2026-02-09T11:41:31.0857438Z [36;1m            "string"[0m
+2026-02-09T11:41:31.0857645Z [36;1m          ][0m
+2026-02-09T11:41:31.0857820Z [36;1m        },[0m
+2026-02-09T11:41:31.0858011Z [36;1m        "temporary_id": {[0m
+2026-02-09T11:41:31.0859108Z [36;1m          "description": "Unique temporary identifier for referencing this issue before it's created. Format: 'aw_' followed by 12 hex characters (e.g., 'aw_abc123def456'). Use '#aw_ID' in body text to reference other issues by their temporary_id; these are replaced with actual issue numbers after creation.",[0m
+2026-02-09T11:41:31.0860206Z [36;1m          "type": "string"[0m
+2026-02-09T11:41:31.0860428Z [36;1m        },[0m
+2026-02-09T11:41:31.0860612Z [36;1m        "title": {[0m
+2026-02-09T11:41:31.0861197Z [36;1m          "description": "Concise issue title summarizing the bug, feature, or task. The title appears as the main heading, so keep it brief and descriptive.",[0m
+2026-02-09T11:41:31.0861821Z [36;1m          "type": "string"[0m
+2026-02-09T11:41:31.0862037Z [36;1m        }[0m
+2026-02-09T11:41:31.0862204Z [36;1m      },[0m
+2026-02-09T11:41:31.0862381Z [36;1m      "required": [[0m
+2026-02-09T11:41:31.0862583Z [36;1m        "title",[0m
+2026-02-09T11:41:31.0862970Z [36;1m        "body"[0m
+2026-02-09T11:41:31.0863158Z [36;1m      ],[0m
+2026-02-09T11:41:31.0863338Z [36;1m      "type": "object"[0m
+2026-02-09T11:41:31.0863547Z [36;1m    },[0m
+2026-02-09T11:41:31.0863720Z [36;1m    "name": "create_issue"[0m
+2026-02-09T11:41:31.0864152Z [36;1m  },[0m
+2026-02-09T11:41:31.0864323Z [36;1m  {[0m
+2026-02-09T11:41:31.0865409Z [36;1m    "description": "Report that a tool or capability needed to complete the task is not available, or share any information you deem important about missing functionality or limitations. Use this when you cannot accomplish what was requested because the required functionality is missing or access is restricted.",[0m
+2026-02-09T11:41:31.0866584Z [36;1m    "inputSchema": {[0m
+2026-02-09T11:41:31.0866829Z [36;1m      "additionalProperties": false,[0m
+2026-02-09T11:41:31.0867092Z [36;1m      "properties": {[0m
+2026-02-09T11:41:31.0878800Z [36;1m        "alternatives": {[0m
+2026-02-09T11:41:31.0879415Z [36;1m          "description": "Any workarounds, manual steps, or alternative approaches the user could take (max 256 characters).",[0m
+2026-02-09T11:41:31.0880183Z [36;1m          "type": "string"[0m
+2026-02-09T11:41:31.0880423Z [36;1m        },[0m
+2026-02-09T11:41:31.0880624Z [36;1m        "reason": {[0m
+2026-02-09T11:41:31.0881194Z [36;1m          "description": "Explanation of why this tool is needed or what information you want to share about the limitation (max 256 characters).",[0m
+2026-02-09T11:41:31.0881790Z [36;1m          "type": "string"[0m
+2026-02-09T11:41:31.0882010Z [36;1m        },[0m
+2026-02-09T11:41:31.0882194Z [36;1m        "tool": {[0m
+2026-02-09T11:41:31.0882949Z [36;1m          "description": "Optional: Name or description of the missing tool or capability (max 128 characters). Be specific about what functionality is needed.",[0m
+2026-02-09T11:41:31.0883591Z [36;1m          "type": "string"[0m
+2026-02-09T11:41:31.0883809Z [36;1m        }[0m
+2026-02-09T11:41:31.0884172Z [36;1m      },[0m
+2026-02-09T11:41:31.0884367Z [36;1m      "required": [[0m
+2026-02-09T11:41:31.0884577Z [36;1m        "reason"[0m
+2026-02-09T11:41:31.0884766Z [36;1m      ],[0m
+2026-02-09T11:41:31.0884948Z [36;1m      "type": "object"[0m
+2026-02-09T11:41:31.0885158Z [36;1m    },[0m
+2026-02-09T11:41:31.0885334Z [36;1m    "name": "missing_tool"[0m
+2026-02-09T11:41:31.0885556Z [36;1m  },[0m
+2026-02-09T11:41:31.0885714Z [36;1m  {[0m
+2026-02-09T11:41:31.0886939Z [36;1m    "description": "Log a transparency message when no significant actions are needed. Use this to confirm workflow completion and provide visibility when analysis is complete but no changes or outputs are required (e.g., 'No issues found', 'All checks passed'). This ensures the workflow produces human-visible output even when no other actions are taken.",[0m
+2026-02-09T11:41:31.0888241Z [36;1m    "inputSchema": {[0m
+2026-02-09T11:41:31.0888487Z [36;1m      "additionalProperties": false,[0m
+2026-02-09T11:41:31.0888753Z [36;1m      "properties": {[0m
+2026-02-09T11:41:31.0888975Z [36;1m        "message": {[0m
+2026-02-09T11:41:31.0889712Z [36;1m          "description": "Status or completion message to log. Should explain what was analyzed and the outcome (e.g., 'Code review complete - no issues found', 'Analysis complete - all tests passing').",[0m
+2026-02-09T11:41:31.0890479Z [36;1m          "type": "string"[0m
+2026-02-09T11:41:31.0890698Z [36;1m        }[0m
+2026-02-09T11:41:31.0890865Z [36;1m      },[0m
+2026-02-09T11:41:31.0891043Z [36;1m      "required": [[0m
+2026-02-09T11:41:31.0891249Z [36;1m        "message"[0m
+2026-02-09T11:41:31.0891438Z [36;1m      ],[0m
+2026-02-09T11:41:31.0891615Z [36;1m      "type": "object"[0m
+2026-02-09T11:41:31.0891816Z [36;1m    },[0m
+2026-02-09T11:41:31.0891992Z [36;1m    "name": "noop"[0m
+2026-02-09T11:41:31.0892192Z [36;1m  },[0m
+2026-02-09T11:41:31.0892347Z [36;1m  {[0m
+2026-02-09T11:41:31.0893089Z [36;1m    "description": "Report that data or information needed to complete the task is not available. Use this when you cannot accomplish what was requested because required data, context, or information is missing.",[0m
+2026-02-09T11:41:31.0894245Z [36;1m    "inputSchema": {[0m
+2026-02-09T11:41:31.0894482Z [36;1m      "additionalProperties": false,[0m
+2026-02-09T11:41:31.0894751Z [36;1m      "properties": {[0m
+2026-02-09T11:41:31.0894973Z [36;1m        "alternatives": {[0m
+2026-02-09T11:41:31.0895482Z [36;1m          "description": "Any workarounds, manual steps, or alternative approaches the user could take (max 256 characters).",[0m
+2026-02-09T11:41:31.0896016Z [36;1m          "type": "string"[0m
+2026-02-09T11:41:31.0896227Z [36;1m        },[0m
+2026-02-09T11:41:31.0896414Z [36;1m        "context": {[0m
+2026-02-09T11:41:31.0896883Z [36;1m          "description": "Additional context about the missing data or where it should come from (max 256 characters).",[0m
+2026-02-09T11:41:31.0897382Z [36;1m          "type": "string"[0m
+2026-02-09T11:41:31.0897597Z [36;1m        },[0m
+2026-02-09T11:41:31.0897795Z [36;1m        "data_type": {[0m
+2026-02-09T11:41:31.0898461Z [36;1m          "description": "Type or description of the missing data or information (max 128 characters). Be specific about what data is needed.",[0m
+2026-02-09T11:41:31.0899049Z [36;1m          "type": "string"[0m
+2026-02-09T11:41:31.0899276Z [36;1m        },[0m
+2026-02-09T11:41:31.0899462Z [36;1m        "reason": {[0m
+2026-02-09T11:41:31.0899891Z [36;1m          "description": "Explanation of why this data is needed to complete the task (max 256 characters).",[0m
+2026-02-09T11:41:31.0900365Z [36;1m          "type": "string"[0m
+2026-02-09T11:41:31.0900588Z [36;1m        }[0m
+2026-02-09T11:41:31.0900764Z [36;1m      },[0m
+2026-02-09T11:41:31.0900949Z [36;1m      "required": [],[0m
+2026-02-09T11:41:31.0901167Z [36;1m      "type": "object"[0m
+2026-02-09T11:41:31.0901374Z [36;1m    },[0m
+2026-02-09T11:41:31.0901549Z [36;1m    "name": "missing_data"[0m
+2026-02-09T11:41:31.0901809Z [36;1m  }[0m
+2026-02-09T11:41:31.0901965Z [36;1m][0m
+2026-02-09T11:41:31.0902122Z [36;1mEOF[0m
+2026-02-09T11:41:31.0902374Z [36;1mcat > /opt/gh-aw/safeoutputs/validation.json << 'EOF'[0m
+2026-02-09T11:41:31.0902677Z [36;1m{[0m
+2026-02-09T11:41:31.0902847Z [36;1m  "create_issue": {[0m
+2026-02-09T11:41:31.0903058Z [36;1m    "defaultMax": 1,[0m
+2026-02-09T11:41:31.0903269Z [36;1m    "fields": {[0m
+2026-02-09T11:41:31.0903466Z [36;1m      "body": {[0m
+2026-02-09T11:41:31.0903749Z [36;1m        "required": true,[0m
+2026-02-09T11:41:31.0904180Z [36;1m        "type": "string",[0m
+2026-02-09T11:41:31.0904409Z [36;1m        "sanitize": true,[0m
+2026-02-09T11:41:31.0904634Z [36;1m        "maxLength": 65000[0m
+2026-02-09T11:41:31.0904847Z [36;1m      },[0m
+2026-02-09T11:41:31.0905027Z [36;1m      "labels": {[0m
+2026-02-09T11:41:31.0905237Z [36;1m        "type": "array",[0m
+2026-02-09T11:41:31.0905464Z [36;1m        "itemType": "string",[0m
+2026-02-09T11:41:31.0905708Z [36;1m        "itemSanitize": true,[0m
+2026-02-09T11:41:31.0905950Z [36;1m        "itemMaxLength": 128[0m
+2026-02-09T11:41:31.0906179Z [36;1m      },[0m
+2026-02-09T11:41:31.0906356Z [36;1m      "parent": {[0m
+2026-02-09T11:41:31.0906571Z [36;1m        "issueOrPRNumber": true[0m
+2026-02-09T11:41:31.0906805Z [36;1m      },[0m
+2026-02-09T11:41:31.0906974Z [36;1m      "repo": {[0m
+2026-02-09T11:41:31.0907190Z [36;1m        "type": "string",[0m
+2026-02-09T11:41:31.0907416Z [36;1m        "maxLength": 256[0m
+2026-02-09T11:41:31.0907624Z [36;1m      },[0m
+2026-02-09T11:41:31.0907803Z [36;1m      "temporary_id": {[0m
+2026-02-09T11:41:31.0908024Z [36;1m        "type": "string"[0m
+2026-02-09T11:41:31.0908233Z [36;1m      },[0m
+2026-02-09T11:41:31.0908406Z [36;1m      "title": {[0m
+2026-02-09T11:41:31.0908607Z [36;1m        "required": true,[0m
+2026-02-09T11:41:31.0908830Z [36;1m        "type": "string",[0m
+2026-02-09T11:41:31.0909051Z [36;1m        "sanitize": true,[0m
+2026-02-09T11:41:31.0909266Z [36;1m        "maxLength": 128[0m
+2026-02-09T11:41:31.0909610Z [36;1m      }[0m
+2026-02-09T11:41:31.0909778Z [36;1m    }[0m
+2026-02-09T11:41:31.0909949Z [36;1m  },[0m
+2026-02-09T11:41:31.0910127Z [36;1m  "missing_tool": {[0m
+2026-02-09T11:41:31.0910338Z [36;1m    "defaultMax": 20,[0m
+2026-02-09T11:41:31.0910550Z [36;1m    "fields": {[0m
+2026-02-09T11:41:31.0910755Z [36;1m      "alternatives": {[0m
+2026-02-09T11:41:31.0910974Z [36;1m        "type": "string",[0m
+2026-02-09T11:41:31.0911200Z [36;1m        "sanitize": true,[0m
+2026-02-09T11:41:31.0911413Z [36;1m        "maxLength": 512[0m
+2026-02-09T11:41:31.0911624Z [36;1m      },[0m
+2026-02-09T11:41:31.0911798Z [36;1m      "reason": {[0m
+2026-02-09T11:41:31.0911997Z [36;1m        "required": true,[0m
+2026-02-09T11:41:31.0912217Z [36;1m        "type": "string",[0m
+2026-02-09T11:41:31.0912429Z [36;1m        "sanitize": true,[0m
+2026-02-09T11:41:31.0912650Z [36;1m        "maxLength": 256[0m
+2026-02-09T11:41:31.0912857Z [36;1m      },[0m
+2026-02-09T11:41:31.0913026Z [36;1m      "tool": {[0m
+2026-02-09T11:41:31.0913221Z [36;1m        "type": "string",[0m
+2026-02-09T11:41:31.0913556Z [36;1m        "sanitize": true,[0m
+2026-02-09T11:41:31.0913770Z [36;1m        "maxLength": 128[0m
+2026-02-09T11:41:31.0914198Z [36;1m      }[0m
+2026-02-09T11:41:31.0914364Z [36;1m    }[0m
+2026-02-09T11:41:31.0914528Z [36;1m  },[0m
+2026-02-09T11:41:31.0914694Z [36;1m  "noop": {[0m
+2026-02-09T11:41:31.0914879Z [36;1m    "defaultMax": 1,[0m
+2026-02-09T11:41:31.0915090Z [36;1m    "fields": {[0m
+2026-02-09T11:41:31.0915281Z [36;1m      "message": {[0m
+2026-02-09T11:41:31.0915491Z [36;1m        "required": true,[0m
+2026-02-09T11:41:31.0915711Z [36;1m        "type": "string",[0m
+2026-02-09T11:41:31.0915927Z [36;1m        "sanitize": true,[0m
+2026-02-09T11:41:31.0916158Z [36;1m        "maxLength": 65000[0m
+2026-02-09T11:41:31.0916370Z [36;1m      }[0m
+2026-02-09T11:41:31.0916537Z [36;1m    }[0m
+2026-02-09T11:41:31.0916701Z [36;1m  }[0m
+2026-02-09T11:41:31.0916862Z [36;1m}[0m
+2026-02-09T11:41:31.0917020Z [36;1mEOF[0m
+2026-02-09T11:41:31.0947582Z shell: /usr/bin/bash -e {0}
+2026-02-09T11:41:31.0947813Z env:
+2026-02-09T11:41:31.0947983Z   DEFAULT_BRANCH: main
+2026-02-09T11:41:31.0948197Z   GH_AW_ASSETS_ALLOWED_EXTS: 
+2026-02-09T11:41:31.0948417Z   GH_AW_ASSETS_BRANCH: 
+2026-02-09T11:41:31.0948626Z   GH_AW_ASSETS_MAX_SIZE_KB: 0
+2026-02-09T11:41:31.0948909Z   GH_AW_MCP_LOG_DIR: /tmp/gh-aw/mcp-logs/safeoutputs
+2026-02-09T11:41:31.0949262Z   GH_AW_SAFE_OUTPUTS: /opt/gh-aw/safeoutputs/outputs.jsonl
+2026-02-09T11:41:31.0949648Z   GH_AW_SAFE_OUTPUTS_CONFIG_PATH: /opt/gh-aw/safeoutputs/config.json
+2026-02-09T11:41:31.0950051Z   GH_AW_SAFE_OUTPUTS_TOOLS_PATH: /opt/gh-aw/safeoutputs/tools.json
+2026-02-09T11:41:31.0950365Z ##[endgroup]

@@ -1,0 +1,20 @@
+﻿2026-02-09T11:42:17.7729481Z ##[group]Run actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd
+2026-02-09T11:42:17.7731053Z with:
+2026-02-09T11:42:17.7731768Z   github-token: ***
+2026-02-09T11:42:17.7733532Z   script: const { setupGlobals } = require('/opt/gh-aw/actions/setup_globals.cjs');
+setupGlobals(core, github, context, exec, io);
+const { main } = require('/opt/gh-aw/actions/missing_tool.cjs');
+await main();
+
+2026-02-09T11:42:17.7735502Z   debug: false
+2026-02-09T11:42:17.7735936Z   user-agent: actions/github-script
+2026-02-09T11:42:17.7736453Z   result-encoding: json
+2026-02-09T11:42:17.7736869Z   retries: 0
+2026-02-09T11:42:17.7737309Z   retry-exempt-status-codes: 400,401,403,404,422
+2026-02-09T11:42:17.7737855Z env:
+2026-02-09T11:42:17.7738350Z   GH_AW_AGENT_OUTPUT: /tmp/gh-aw/safeoutputs/agent_output.json
+2026-02-09T11:42:17.7739030Z   GH_AW_WORKFLOW_NAME: Daily Repo Status
+2026-02-09T11:42:17.7740007Z   GH_AW_WORKFLOW_SOURCE: githubnext/agentics/workflows/daily-repo-status.md@e43596e069e74a65cd7d93315091672d278c2642
+2026-02-09T11:42:17.7742292Z   GH_AW_WORKFLOW_SOURCE_URL: https://github.com/githubnext/agentics/tree/e43596e069e74a65cd7d93315091672d278c2642/workflows/daily-repo-status.md
+2026-02-09T11:42:17.7743457Z ##[endgroup]
+2026-02-09T11:42:17.8771393Z Max count: unlimited

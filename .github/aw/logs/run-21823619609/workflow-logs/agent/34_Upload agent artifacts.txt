@@ -1,0 +1,37 @@
+﻿2026-02-09T11:42:01.4507017Z ##[group]Run actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f
+2026-02-09T11:42:01.4507423Z with:
+2026-02-09T11:42:01.4507604Z   name: agent-artifacts
+2026-02-09T11:42:01.4508242Z   path: /tmp/gh-aw/aw-prompts/prompt.txt
+/tmp/gh-aw/aw_info.json
+/tmp/gh-aw/mcp-logs/
+/tmp/gh-aw/sandbox/firewall/logs/
+/tmp/gh-aw/agent-stdio.log
+/tmp/gh-aw/agent/
+
+2026-02-09T11:42:01.4508949Z   if-no-files-found: ignore
+2026-02-09T11:42:01.4509173Z   compression-level: 6
+2026-02-09T11:42:01.4509378Z   overwrite: false
+2026-02-09T11:42:01.4509579Z   include-hidden-files: false
+2026-02-09T11:42:01.4509796Z env:
+2026-02-09T11:42:01.4509955Z   DEFAULT_BRANCH: main
+2026-02-09T11:42:01.4510157Z   GH_AW_ASSETS_ALLOWED_EXTS: 
+2026-02-09T11:42:01.4510374Z   GH_AW_ASSETS_BRANCH: 
+2026-02-09T11:42:01.4510578Z   GH_AW_ASSETS_MAX_SIZE_KB: 0
+2026-02-09T11:42:01.4510834Z   GH_AW_MCP_LOG_DIR: /tmp/gh-aw/mcp-logs/safeoutputs
+2026-02-09T11:42:01.4511187Z   GH_AW_SAFE_OUTPUTS: /opt/gh-aw/safeoutputs/outputs.jsonl
+2026-02-09T11:42:01.4511619Z   GH_AW_SAFE_OUTPUTS_CONFIG_PATH: /opt/gh-aw/safeoutputs/config.json
+2026-02-09T11:42:01.4512034Z   GH_AW_SAFE_OUTPUTS_TOOLS_PATH: /opt/gh-aw/safeoutputs/tools.json
+2026-02-09T11:42:01.4512350Z ##[endgroup]
+2026-02-09T11:42:01.6097621Z Multiple search paths detected. Calculating the least common ancestor of all paths
+2026-02-09T11:42:01.6100871Z The least common ancestor is /tmp/gh-aw. This will be the root directory of the artifact
+2026-02-09T11:42:01.6101763Z With the provided path, there will be 13 files uploaded
+2026-02-09T11:42:01.6107305Z Artifact name is valid!
+2026-02-09T11:42:01.6108034Z Root directory input is valid!
+2026-02-09T11:42:01.6842819Z Beginning upload of artifact content to blob storage
+2026-02-09T11:42:01.7761139Z Uploaded bytes 40036
+2026-02-09T11:42:01.7902816Z Finished uploading artifact content to blob storage!
+2026-02-09T11:42:01.7904157Z SHA256 digest of uploaded artifact zip is eec6d59bd7f32736ccd0816170ce00e2d27ec1fd3c1bfa0d18477742f635d67b
+2026-02-09T11:42:01.7906186Z Finalizing artifact upload
+2026-02-09T11:42:01.9358727Z Artifact agent-artifacts.zip successfully finalized. Artifact ID 5431208741
+2026-02-09T11:42:01.9360581Z Artifact agent-artifacts has been successfully uploaded! Final size is 40036 bytes. Artifact ID is 5431208741
+2026-02-09T11:42:01.9364177Z Artifact download URL: https://github.com/zhengqunkoo/Luxuryshoppingwebsite/actions/runs/21823619609/artifacts/5431208741

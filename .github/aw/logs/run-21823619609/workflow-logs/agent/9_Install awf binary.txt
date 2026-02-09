@@ -1,0 +1,21 @@
+﻿2026-02-09T11:41:21.8782199Z ##[group]Run bash /opt/gh-aw/actions/install_awf_binary.sh v0.13.12
+2026-02-09T11:41:21.8782677Z [36;1mbash /opt/gh-aw/actions/install_awf_binary.sh v0.13.12[0m
+2026-02-09T11:41:21.8815159Z shell: /usr/bin/bash -e {0}
+2026-02-09T11:41:21.8815412Z env:
+2026-02-09T11:41:21.8815578Z   DEFAULT_BRANCH: main
+2026-02-09T11:41:21.8815787Z   GH_AW_ASSETS_ALLOWED_EXTS: 
+2026-02-09T11:41:21.8816006Z   GH_AW_ASSETS_BRANCH: 
+2026-02-09T11:41:21.8816199Z   GH_AW_ASSETS_MAX_SIZE_KB: 0
+2026-02-09T11:41:21.8816467Z   GH_AW_MCP_LOG_DIR: /tmp/gh-aw/mcp-logs/safeoutputs
+2026-02-09T11:41:21.8816820Z   GH_AW_SAFE_OUTPUTS: /opt/gh-aw/safeoutputs/outputs.jsonl
+2026-02-09T11:41:21.8817202Z   GH_AW_SAFE_OUTPUTS_CONFIG_PATH: /opt/gh-aw/safeoutputs/config.json
+2026-02-09T11:41:21.8817612Z   GH_AW_SAFE_OUTPUTS_TOOLS_PATH: /opt/gh-aw/safeoutputs/tools.json
+2026-02-09T11:41:21.8817928Z ##[endgroup]
+2026-02-09T11:41:21.8878164Z Installing awf binary with checksum verification (version: v0.13.12)
+2026-02-09T11:41:21.8891877Z Downloading binary from https://github.com/github/gh-aw-firewall/releases/download/v0.13.12/awf-linux-x64...
+2026-02-09T11:41:22.2219453Z Downloading checksums from https://github.com/github/gh-aw-firewall/releases/download/v0.13.12/checksums.txt...
+2026-02-09T11:41:22.3884302Z Verifying SHA256 checksum...
+2026-02-09T11:41:22.4324806Z ✓ Checksum verification passed
+2026-02-09T11:41:22.4422514Z /usr/local/bin/awf
+2026-02-09T11:41:22.5182596Z 0.13.12
+2026-02-09T11:41:22.5220588Z ✓ AWF installation complete

@@ -59,7 +59,7 @@ jobs:
           terraform import azurerm_key_vault.kv /subscriptions/${{ env.SUBSCRIPTION_ID }}/resourceGroups/rg-oslp-prod-003/providers/Microsoft.KeyVault/vaults/kv-oslp-prod-003
           terraform import azurerm_kubernetes_cluster.aks /subscriptions/${{ env.SUBSCRIPTION_ID }}/resourceGroups/rg-oslp-prod-003/providers/Microsoft.ContainerService/managedClusters/aks-oslp-prod-003
           terraform import azurerm_linux_web_app.web /subscriptions/${{ env.SUBSCRIPTION_ID }}/resourceGroups/rg-oslp-prod-003/providers/Microsoft.Web/sites/app-oslp-prod-003
-          terraform import azurerm_service_plan.plan /subscriptions/${{ env.SUBSCRIPTION_ID }}/resourceGroups/rg-oslp-prod-003/providers/Microsoft.Web/serverfarms/asp-oslp-prod
+          terraform import azurerm_service_plan.plan /subscriptions/${{ env.SUBSCRIPTION_ID }}/resourceGroups/rg-oslp-prod-003/providers/Microsoft.Web/serverFarms/asp-oslp-prod
           terraform import azurerm_mssql_server.sql /subscriptions/${{ env.SUBSCRIPTION_ID }}/resourceGroups/rg-oslp-prod-003/providers/Microsoft.Sql/servers/sql-oslp-prod-003
           terraform import azurerm_mssql_database.db /subscriptions/${{ env.SUBSCRIPTION_ID }}/resourceGroups/rg-oslp-prod-003/providers/Microsoft.Sql/servers/sql-oslp-prod-003/databases/sqldb-oslp-prod
           terraform import azurerm_role_assignment.aks_acr_pull /subscriptions/${{ env.SUBSCRIPTION_ID }}/resourceGroups/rg-oslp-prod-003/providers/Microsoft.Authorization/roleAssignments/<role-assignment-id>

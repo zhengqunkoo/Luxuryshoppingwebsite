@@ -1,0 +1,42 @@
+﻿2026-02-09T11:42:17.8982739Z ##[group]Run actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd
+2026-02-09T11:42:17.8983589Z with:
+2026-02-09T11:42:17.8984630Z   github-token: ***
+2026-02-09T11:42:17.8986061Z   script: const { setupGlobals } = require('/opt/gh-aw/actions/setup_globals.cjs');
+setupGlobals(core, github, context, exec, io);
+const { main } = require('/opt/gh-aw/actions/handle_agent_failure.cjs');
+await main();
+
+2026-02-09T11:42:17.8987538Z   debug: false
+2026-02-09T11:42:17.8987951Z   user-agent: actions/github-script
+2026-02-09T11:42:17.8988466Z   result-encoding: json
+2026-02-09T11:42:17.8988881Z   retries: 0
+2026-02-09T11:42:17.8989355Z   retry-exempt-status-codes: 400,401,403,404,422
+2026-02-09T11:42:17.8989882Z env:
+2026-02-09T11:42:17.8990370Z   GH_AW_AGENT_OUTPUT: /tmp/gh-aw/safeoutputs/agent_output.json
+2026-02-09T11:42:17.8991021Z   GH_AW_WORKFLOW_NAME: Daily Repo Status
+2026-02-09T11:42:17.8991993Z   GH_AW_WORKFLOW_SOURCE: githubnext/agentics/workflows/daily-repo-status.md@e43596e069e74a65cd7d93315091672d278c2642
+2026-02-09T11:42:17.8994207Z   GH_AW_WORKFLOW_SOURCE_URL: https://github.com/githubnext/agentics/tree/e43596e069e74a65cd7d93315091672d278c2642/workflows/daily-repo-status.md
+2026-02-09T11:42:17.8995698Z   GH_AW_RUN_URL: https://github.com/zhengqunkoo/Luxuryshoppingwebsite/actions/runs/21823619609
+2026-02-09T11:42:17.8996548Z   GH_AW_AGENT_CONCLUSION: failure
+2026-02-09T11:42:17.8997823Z   GH_AW_SECRET_VERIFICATION_RESULT: success
+2026-02-09T11:42:17.8998424Z   GH_AW_CHECKOUT_PR_SUCCESS: true
+2026-02-09T11:42:17.8998902Z ##[endgroup]
+2026-02-09T11:42:18.0128099Z Agent conclusion: failure
+2026-02-09T11:42:18.0133534Z Workflow name: Daily Repo Status
+2026-02-09T11:42:18.0137122Z Secret verification result: success
+2026-02-09T11:42:18.0139986Z Assignment error count: 0
+2026-02-09T11:42:18.0142780Z Create discussion error count: 0
+2026-02-09T11:42:18.0146076Z Checkout PR success: true
+2026-02-09T11:42:18.0456860Z fatal: not a git repository (or any of the parent directories): .git
+2026-02-09T11:42:18.0458126Z Searching for pull request from branch: main
+2026-02-09T11:42:19.2241244Z No pull request found for branch: main
+2026-02-09T11:42:19.2242329Z Searching for parent issue: "[agentic-workflows] Failed runs"
+2026-02-09T11:42:19.2243391Z No suitable parent issue found, creating first parent
+2026-02-09T11:42:19.2248959Z ✓ Created parent issue #11: https://github.com/zhengqunkoo/Luxuryshoppingwebsite/issues/11
+2026-02-09T11:42:19.2250816Z Checking for existing issue with title: "[agentics] Daily Repo Status failed"
+2026-02-09T11:42:19.4291933Z No existing issue found, creating a new one
+2026-02-09T11:42:19.4315987Z fatal: not a git repository (or any of the parent directories): .git
+2026-02-09T11:42:19.4334923Z Error reading agent output file: ENOENT: no such file or directory, open '/tmp/gh-aw/safeoutputs/agent_output.json'
+2026-02-09T11:42:19.8299156Z ✓ Created new issue #12: https://github.com/zhengqunkoo/Luxuryshoppingwebsite/issues/12
+2026-02-09T11:42:19.8310767Z Linking issue #12 as sub-issue of #11
+2026-02-09T11:42:20.3356019Z ✓ Successfully linked #12 as sub-issue of #11

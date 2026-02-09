@@ -1,0 +1,28 @@
+﻿2026-02-09T11:41:18.3788600Z ##[group]Run /opt/gh-aw/actions/install_copilot_cli.sh 0.0.405
+2026-02-09T11:41:18.3789051Z [36;1m/opt/gh-aw/actions/install_copilot_cli.sh 0.0.405[0m
+2026-02-09T11:41:18.3816474Z shell: /usr/bin/bash -e {0}
+2026-02-09T11:41:18.3816726Z env:
+2026-02-09T11:41:18.3816895Z   DEFAULT_BRANCH: main
+2026-02-09T11:41:18.3817111Z   GH_AW_ASSETS_ALLOWED_EXTS: 
+2026-02-09T11:41:18.3817334Z   GH_AW_ASSETS_BRANCH: 
+2026-02-09T11:41:18.3817532Z   GH_AW_ASSETS_MAX_SIZE_KB: 0
+2026-02-09T11:41:18.3817808Z   GH_AW_MCP_LOG_DIR: /tmp/gh-aw/mcp-logs/safeoutputs
+2026-02-09T11:41:18.3818173Z   GH_AW_SAFE_OUTPUTS: /opt/gh-aw/safeoutputs/outputs.jsonl
+2026-02-09T11:41:18.3818565Z   GH_AW_SAFE_OUTPUTS_CONFIG_PATH: /opt/gh-aw/safeoutputs/config.json
+2026-02-09T11:41:18.3818999Z   GH_AW_SAFE_OUTPUTS_TOOLS_PATH: /opt/gh-aw/safeoutputs/tools.json
+2026-02-09T11:41:18.3819325Z ##[endgroup]
+2026-02-09T11:41:18.3882747Z Ensuring correct ownership of /home/runner/.copilot...
+2026-02-09T11:41:18.3975095Z Installing GitHub Copilot CLI version 0.0.405...
+2026-02-09T11:41:18.3975860Z Attempt 1 of 3: Downloading Copilot CLI installer...
+2026-02-09T11:41:18.4369160Z Successfully downloaded installer
+2026-02-09T11:41:18.4369867Z Installing Copilot CLI version 0.0.405...
+2026-02-09T11:41:18.4437891Z Installing GitHub Copilot CLI...
+2026-02-09T11:41:18.4464648Z Downloading from: https://github.com/github/copilot-cli/releases/download/v0.0.405/copilot-linux-x64.tar.gz
+2026-02-09T11:41:18.9839760Z ✓ Checksum validated
+2026-02-09T11:41:20.6944448Z ✓ GitHub Copilot CLI installed to /usr/local/bin/copilot
+2026-02-09T11:41:20.7065564Z 
+2026-02-09T11:41:20.7066139Z Installation complete! Run 'copilot help' to get started.
+2026-02-09T11:41:20.7090296Z Verifying Copilot CLI installation...
+2026-02-09T11:41:21.8572395Z GitHub Copilot CLI 0.0.405.
+2026-02-09T11:41:21.8572965Z Run 'copilot update' to check for updates.
+2026-02-09T11:41:21.8751542Z ✓ Copilot CLI installation complete

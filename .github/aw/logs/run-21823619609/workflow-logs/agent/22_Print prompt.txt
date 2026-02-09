@@ -1,0 +1,95 @@
+﻿2026-02-09T11:41:37.7646688Z ##[group]Run bash /opt/gh-aw/actions/print_prompt_summary.sh
+2026-02-09T11:41:37.7647144Z [36;1mbash /opt/gh-aw/actions/print_prompt_summary.sh[0m
+2026-02-09T11:41:37.7674705Z shell: /usr/bin/bash -e {0}
+2026-02-09T11:41:37.7674954Z env:
+2026-02-09T11:41:37.7675123Z   DEFAULT_BRANCH: main
+2026-02-09T11:41:37.7675445Z   GH_AW_ASSETS_ALLOWED_EXTS: 
+2026-02-09T11:41:37.7675836Z   GH_AW_ASSETS_BRANCH: 
+2026-02-09T11:41:37.7688133Z   GH_AW_ASSETS_MAX_SIZE_KB: 0
+2026-02-09T11:41:37.7688613Z   GH_AW_MCP_LOG_DIR: /tmp/gh-aw/mcp-logs/safeoutputs
+2026-02-09T11:41:37.7689144Z   GH_AW_SAFE_OUTPUTS: /opt/gh-aw/safeoutputs/outputs.jsonl
+2026-02-09T11:41:37.7689563Z   GH_AW_SAFE_OUTPUTS_CONFIG_PATH: /opt/gh-aw/safeoutputs/config.json
+2026-02-09T11:41:37.7690038Z   GH_AW_SAFE_OUTPUTS_TOOLS_PATH: /opt/gh-aw/safeoutputs/tools.json
+2026-02-09T11:41:37.7690451Z   GH_AW_PROMPT: /tmp/gh-aw/aw-prompts/prompt.txt
+2026-02-09T11:41:37.7690738Z ##[endgroup]
+2026-02-09T11:41:37.7750607Z Generated Prompt:
+2026-02-09T11:41:37.7759637Z <system>
+2026-02-09T11:41:37.7760015Z <temporary-files>
+2026-02-09T11:41:37.7760371Z <path>/tmp/gh-aw/agent/</path>
+2026-02-09T11:41:37.7761854Z <instruction>When you need to create temporary files or directories during your work, always use the /tmp/gh-aw/agent/ directory that has been pre-created for you. Do NOT use the root /tmp/ directory directly.</instruction>
+2026-02-09T11:41:37.7762952Z </temporary-files>
+2026-02-09T11:41:37.7763181Z <file-editing>
+2026-02-09T11:41:37.7763391Z <allowed-paths>
+2026-02-09T11:41:37.7763661Z   <path name="workspace">$GITHUB_WORKSPACE</path>
+2026-02-09T11:41:37.7764159Z   <path name="temporary">/tmp/gh-aw/</path>
+2026-02-09T11:41:37.7764473Z </allowed-paths>
+2026-02-09T11:41:37.7765057Z <restriction>Do NOT attempt to edit files outside these directories as you do not have the necessary permissions.</restriction>
+2026-02-09T11:41:37.7765735Z </file-editing>
+2026-02-09T11:41:37.7765957Z <markdown-generation>
+2026-02-09T11:41:37.7766959Z <instruction>When generating markdown text, use 6 backticks instead of 3 to avoid creating unbalanced code regions where the text looks broken because the code regions are opening and closing out of sync.</instruction>
+2026-02-09T11:41:37.7768018Z <example>
+2026-02-09T11:41:37.7768211Z Correct:
+2026-02-09T11:41:37.7768412Z ``````markdown
+2026-02-09T11:41:37.7768625Z # Example
+2026-02-09T11:41:37.7768813Z ```javascript
+2026-02-09T11:41:37.7769029Z console.log('hello');
+2026-02-09T11:41:37.7769255Z ```
+2026-02-09T11:41:37.7769429Z ``````
+2026-02-09T11:41:37.7769543Z 
+2026-02-09T11:41:37.7769625Z Incorrect:
+2026-02-09T11:41:37.7769819Z ```markdown
+2026-02-09T11:41:37.7770014Z # Example
+2026-02-09T11:41:37.7770197Z ```javascript
+2026-02-09T11:41:37.7770404Z console.log('hello');
+2026-02-09T11:41:37.7770628Z ```
+2026-02-09T11:41:37.7770800Z ```
+2026-02-09T11:41:37.7770986Z </example>
+2026-02-09T11:41:37.7771196Z </markdown-generation>
+2026-02-09T11:41:37.7771433Z <safe-outputs>
+2026-02-09T11:41:37.7771730Z <description>GitHub API Access Instructions</description>
+2026-02-09T11:41:37.7772098Z <important>
+2026-02-09T11:41:37.7772442Z The gh CLI is NOT authenticated. Do NOT use gh commands for GitHub operations.
+2026-02-09T11:41:37.7772843Z </important>
+2026-02-09T11:41:37.7773019Z <instructions>
+2026-02-09T11:41:37.7773833Z To create or modify GitHub resources (issues, discussions, pull requests, etc.), you MUST call the appropriate safe output tool. Simply writing content will NOT work - the workflow requires actual tool calls.
+2026-02-09T11:41:37.7774868Z 
+2026-02-09T11:41:37.7775024Z Discover available tools from the safeoutputs MCP server.
+2026-02-09T11:41:37.7775291Z 
+2026-02-09T11:41:37.7776164Z **Critical**: Tool calls write structured data that downstream jobs process. Without tool calls, follow-up actions will be skipped.
+2026-02-09T11:41:37.7777020Z 
+2026-02-09T11:41:37.7777725Z **Note**: If you made no other safe output tool calls during this workflow execution, call the "noop" tool to provide a status message indicating completion or that no actions were needed.
+2026-02-09T11:41:37.7778708Z </instructions>
+2026-02-09T11:41:37.7778905Z </safe-outputs>
+2026-02-09T11:41:37.7779101Z <github-context>
+2026-02-09T11:41:37.7779419Z The following GitHub context information is available for this workflow:
+2026-02-09T11:41:37.7779811Z - **actor**: zhengqunkoo
+2026-02-09T11:41:37.7780081Z - **repository**: zhengqunkoo/Luxuryshoppingwebsite
+2026-02-09T11:41:37.7780539Z - **workspace**: /home/runner/work/Luxuryshoppingwebsite/Luxuryshoppingwebsite
+2026-02-09T11:41:37.7780963Z - **workflow-run-id**: 21823619609
+2026-02-09T11:41:37.7781210Z </github-context>
+2026-02-09T11:41:37.7781327Z 
+2026-02-09T11:41:37.7781402Z </system>
+2026-02-09T11:41:37.7781507Z 
+2026-02-09T11:41:37.7781582Z # Daily Repo Status
+2026-02-09T11:41:37.7781700Z 
+2026-02-09T11:41:37.7781886Z Create an upbeat daily status report for the repo as a GitHub issue.
+2026-02-09T11:41:37.7782148Z 
+2026-02-09T11:41:37.7782225Z ## What to include
+2026-02-09T11:41:37.7782334Z 
+2026-02-09T11:41:37.7782543Z - Recent repository activity (issues, PRs, discussions, releases, code changes)
+2026-02-09T11:41:37.7782971Z - Progress tracking, goal reminders and highlights
+2026-02-09T11:41:37.7783401Z - Project status and recommendations
+2026-02-09T11:41:37.7783671Z - Actionable next steps for maintainers
+2026-02-09T11:41:37.7784030Z 
+2026-02-09T11:41:37.7784161Z ## Style
+2026-02-09T11:41:37.7784325Z 
+2026-02-09T11:41:37.7784631Z - Be positive, encouraging, and helpful 🌟
+2026-02-09T11:41:37.7784914Z - Use emojis moderately for engagement
+2026-02-09T11:41:37.7785221Z - Keep it concise - adjust length based on actual activity
+2026-02-09T11:41:37.7785447Z 
+2026-02-09T11:41:37.7785515Z ## Process
+2026-02-09T11:41:37.7785618Z 
+2026-02-09T11:41:37.7785725Z 1. Gather recent activity from the repository
+2026-02-09T11:41:37.7786061Z 2. Study the repository, its issues and its pull requests
+2026-02-09T11:41:37.7786429Z 3. Create a new GitHub issue with your findings and insights
+2026-02-09T11:41:37.7786657Z 

@@ -1,0 +1,8 @@
+1770637303.622 ::1:50660 - -:- 0.0 - 0 NONE_NONE:HIER_NONE error:transaction-end-before-headers "-"
+1770637308.661 ::1:56092 - -:- 0.0 - 0 NONE_NONE:HIER_NONE error:transaction-end-before-headers "-"
+1770637308.720 172.30.0.20:40748 telemetry.individual.githubcopilot.com:443 -:- 1.1 CONNECT 403 TCP_DENIED:HIER_NONE telemetry.individual.githubcopilot.com:443 "-"
+1770637308.757 172.30.0.20:40736 api.individual.githubcopilot.com:443 140.82.114.22:443 1.1 CONNECT 200 TCP_TUNNEL:HIER_DIRECT api.individual.githubcopilot.com:443 "-"
+1770637308.757 172.30.0.20:40726 api.individual.githubcopilot.com:443 140.82.114.22:443 1.1 CONNECT 200 TCP_TUNNEL:HIER_DIRECT api.individual.githubcopilot.com:443 "-"
+1770637308.757 172.30.0.20:47424 api.githubcopilot.com:443 140.82.114.22:443 1.1 CONNECT 200 TCP_TUNNEL:HIER_DIRECT api.githubcopilot.com:443 "-"
+1770637308.757 172.30.0.20:47408 api.individual.githubcopilot.com:443 140.82.114.22:443 1.1 CONNECT 200 TCP_TUNNEL:HIER_DIRECT api.individual.githubcopilot.com:443 "-"
+1770637308.757 172.30.0.20:47398 api.github.com:443 140.82.113.6:443 1.1 CONNECT 200 TCP_TUNNEL:HIER_DIRECT api.github.com:443 "-"

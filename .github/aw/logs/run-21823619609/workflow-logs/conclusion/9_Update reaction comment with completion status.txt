@@ -1,0 +1,30 @@
+﻿2026-02-09T11:42:20.3609930Z ##[group]Run actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd
+2026-02-09T11:42:20.3611628Z with:
+2026-02-09T11:42:20.3613036Z   github-token: ***
+2026-02-09T11:42:20.3616557Z   script: const { setupGlobals } = require('/opt/gh-aw/actions/setup_globals.cjs');
+setupGlobals(core, github, context, exec, io);
+const { main } = require('/opt/gh-aw/actions/notify_comment_error.cjs');
+await main();
+
+2026-02-09T11:42:20.3620073Z   debug: false
+2026-02-09T11:42:20.3620963Z   user-agent: actions/github-script
+2026-02-09T11:42:20.3622369Z   result-encoding: json
+2026-02-09T11:42:20.3623300Z   retries: 0
+2026-02-09T11:42:20.3624494Z   retry-exempt-status-codes: 400,401,403,404,422
+2026-02-09T11:42:20.3625737Z env:
+2026-02-09T11:42:20.3626800Z   GH_AW_AGENT_OUTPUT: /tmp/gh-aw/safeoutputs/agent_output.json
+2026-02-09T11:42:20.3628232Z   GH_AW_COMMENT_ID: 
+2026-02-09T11:42:20.3629142Z   GH_AW_COMMENT_REPO: 
+2026-02-09T11:42:20.3630839Z   GH_AW_RUN_URL: https://github.com/zhengqunkoo/Luxuryshoppingwebsite/actions/runs/21823619609
+2026-02-09T11:42:20.3632885Z   GH_AW_WORKFLOW_NAME: Daily Repo Status
+2026-02-09T11:42:20.3634281Z   GH_AW_AGENT_CONCLUSION: failure
+2026-02-09T11:42:20.3635414Z   GH_AW_DETECTION_CONCLUSION: skipped
+2026-02-09T11:42:20.3636518Z ##[endgroup]
+2026-02-09T11:42:20.4928813Z Comment ID: 
+2026-02-09T11:42:20.4941544Z Comment Repo: 
+2026-02-09T11:42:20.4946584Z Run URL: https://github.com/zhengqunkoo/Luxuryshoppingwebsite/actions/runs/21823619609
+2026-02-09T11:42:20.4984410Z Workflow Name: Daily Repo Status
+2026-02-09T11:42:20.4992100Z Agent Conclusion: failure
+2026-02-09T11:42:20.5037928Z Detection Conclusion: skipped
+2026-02-09T11:42:20.5041911Z Error reading agent output file: ENOENT: no such file or directory, open '/tmp/gh-aw/safeoutputs/agent_output.json'
+2026-02-09T11:42:20.5076487Z No comment ID found and no noop messages to process, skipping comment update

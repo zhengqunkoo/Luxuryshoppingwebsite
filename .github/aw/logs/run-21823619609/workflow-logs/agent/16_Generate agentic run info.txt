@@ -1,0 +1,91 @@
+﻿2026-02-09T11:41:37.3837215Z ##[group]Run actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd
+2026-02-09T11:41:37.3837616Z with:
+2026-02-09T11:41:37.3841352Z   script: const fs = require('fs');
+
+const awInfo = {
+  engine_id: "copilot",
+  engine_name: "GitHub Copilot CLI",
+  model: process.env.GH_AW_MODEL_AGENT_COPILOT || "",
+  version: "",
+  agent_version: "0.0.405",
+  cli_version: "v0.42.16",
+  workflow_name: "Daily Repo Status",
+  experimental: false,
+  supports_tools_allowlist: true,
+  supports_http_transport: true,
+  run_id: context.runId,
+  run_number: context.runNumber,
+  run_attempt: process.env.GITHUB_RUN_ATTEMPT,
+  repository: context.repo.owner + '/' + context.repo.repo,
+  ref: context.ref,
+  sha: context.sha,
+  actor: context.actor,
+  event_name: context.eventName,
+  staged: false,
+  allowed_domains: ["defaults"],
+  firewall_enabled: true,
+  awf_version: "v0.13.12",
+  awmg_version: "v0.0.113",
+  steps: {
+    firewall: "squid"
+  },
+  created_at: new Date().toISOString()
+};
+
+// Write to /tmp/gh-aw directory to avoid inclusion in PR
+const tmpPath = '/tmp/gh-aw/aw_info.json';
+fs.writeFileSync(tmpPath, JSON.stringify(awInfo, null, 2));
+console.log('Generated aw_info.json at:', tmpPath);
+console.log(JSON.stringify(awInfo, null, 2));
+
+// Set model as output for reuse in other steps/jobs
+core.setOutput('model', awInfo.model);
+
+2026-02-09T11:41:37.3845773Z   github-token: ***
+2026-02-09T11:41:37.3845973Z   debug: false
+2026-02-09T11:41:37.3846172Z   user-agent: actions/github-script
+2026-02-09T11:41:37.3846425Z   result-encoding: json
+2026-02-09T11:41:37.3846620Z   retries: 0
+2026-02-09T11:41:37.3846832Z   retry-exempt-status-codes: 400,401,403,404,422
+2026-02-09T11:41:37.3847102Z env:
+2026-02-09T11:41:37.3847269Z   DEFAULT_BRANCH: main
+2026-02-09T11:41:37.3847468Z   GH_AW_ASSETS_ALLOWED_EXTS: 
+2026-02-09T11:41:37.3847690Z   GH_AW_ASSETS_BRANCH: 
+2026-02-09T11:41:37.3847893Z   GH_AW_ASSETS_MAX_SIZE_KB: 0
+2026-02-09T11:41:37.3848150Z   GH_AW_MCP_LOG_DIR: /tmp/gh-aw/mcp-logs/safeoutputs
+2026-02-09T11:41:37.3848491Z   GH_AW_SAFE_OUTPUTS: /opt/gh-aw/safeoutputs/outputs.jsonl
+2026-02-09T11:41:37.3848888Z   GH_AW_SAFE_OUTPUTS_CONFIG_PATH: /opt/gh-aw/safeoutputs/config.json
+2026-02-09T11:41:37.3849485Z   GH_AW_SAFE_OUTPUTS_TOOLS_PATH: /opt/gh-aw/safeoutputs/tools.json
+2026-02-09T11:41:37.3849804Z ##[endgroup]
+2026-02-09T11:41:37.4558129Z Generated aw_info.json at: /tmp/gh-aw/aw_info.json
+2026-02-09T11:41:37.4560226Z {
+2026-02-09T11:41:37.4560596Z   "engine_id": "copilot",
+2026-02-09T11:41:37.4561043Z   "engine_name": "GitHub Copilot CLI",
+2026-02-09T11:41:37.4561502Z   "model": "",
+2026-02-09T11:41:37.4561812Z   "version": "",
+2026-02-09T11:41:37.4562148Z   "agent_version": "0.0.405",
+2026-02-09T11:41:37.4562524Z   "cli_version": "v0.42.16",
+2026-02-09T11:41:37.4562958Z   "workflow_name": "Daily Repo Status",
+2026-02-09T11:41:37.4563412Z   "experimental": false,
+2026-02-09T11:41:37.4563815Z   "supports_tools_allowlist": true,
+2026-02-09T11:41:37.4564490Z   "supports_http_transport": true,
+2026-02-09T11:41:37.4564925Z   "run_id": 21823619609,
+2026-02-09T11:41:37.4565324Z   "run_number": 1,
+2026-02-09T11:41:37.4565679Z   "run_attempt": "1",
+2026-02-09T11:41:37.4566157Z   "repository": "zhengqunkoo/Luxuryshoppingwebsite",
+2026-02-09T11:41:37.4566708Z   "ref": "refs/heads/main",
+2026-02-09T11:41:37.4567168Z   "sha": "682d22ae6e93dc172f63d3a1d55a3645d3ddae8c",
+2026-02-09T11:41:37.4567681Z   "actor": "zhengqunkoo",
+2026-02-09T11:41:37.4568091Z   "event_name": "workflow_dispatch",
+2026-02-09T11:41:37.4568527Z   "staged": false,
+2026-02-09T11:41:37.4568877Z   "allowed_domains": [
+2026-02-09T11:41:37.4569218Z     "defaults"
+2026-02-09T11:41:37.4569514Z   ],
+2026-02-09T11:41:37.4569799Z   "firewall_enabled": true,
+2026-02-09T11:41:37.4570163Z   "awf_version": "v0.13.12",
+2026-02-09T11:41:37.4570534Z   "awmg_version": "v0.0.113",
+2026-02-09T11:41:37.4570893Z   "steps": {
+2026-02-09T11:41:37.4571171Z     "firewall": "squid"
+2026-02-09T11:41:37.4571502Z   },
+2026-02-09T11:41:37.4571802Z   "created_at": "2026-02-09T11:41:37.454Z"
+2026-02-09T11:41:37.4572594Z }
