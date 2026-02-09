@@ -1,4 +1,5 @@
 # Luxury Shopping Website
+[![Build and Deploy to Azure](https://github.com/zhengqunkoo/Luxuryshoppingwebsite/actions/workflows/deploy-to-azure.yml/badge.svg)](https://github.com/zhengqunkoo/Luxuryshoppingwebsite/actions/workflows/deploy-to-azure.yml)[![Checkov IaC Security Scan](https://github.com/zhengqunkoo/Luxuryshoppingwebsite/actions/workflows/checkov-scan.yml/badge.svg)](https://github.com/zhengqunkoo/Luxuryshoppingwebsite/actions/workflows/checkov-scan.yml)[![Open Policy Agent (OPA) Policy Testing](https://github.com/zhengqunkoo/Luxuryshoppingwebsite/actions/workflows/opa-policy-check.yml/badge.svg)](https://github.com/zhengqunkoo/Luxuryshoppingwebsite/actions/workflows/opa-policy-check.yml)[![OWASP ZAP Security Scan](https://github.com/zhengqunkoo/Luxuryshoppingwebsite/actions/workflows/owasp-zap-scan.yml/badge.svg)](https://github.com/zhengqunkoo/Luxuryshoppingwebsite/actions/workflows/owasp-zap-scan.yml)
 
 A premium e-commerce platform built with Flask, featuring user authentication, product catalog, shopping cart, order management, and an AI-powered luxury advisor with a sophisticated personality.
 
