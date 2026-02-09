@@ -5,7 +5,7 @@ resource "azurerm_resource_group" "rg" {
 
 # Azure Container Registry (ACR)
 resource "azurerm_container_registry" "acr" {
-  name                = "acroslpprod002"
+  name                = "acroslpprod003"
   resource_group_name = azurerm_resource_group.rg.name
   location            = azurerm_resource_group.rg.location
   sku                 = "Premium"
@@ -42,4 +42,24 @@ resource "azurerm_subnet" "paas_subnet" {
   resource_group_name  = azurerm_resource_group.rg.name
   virtual_network_name = azurerm_virtual_network.vnet.name
   address_prefixes     = ["10.0.3.0/24"]
+}
+
+output "acr_name" {
+  value = azurerm_container_registry.acr.name
+}
+
+output "acr_repository" {
+  value = var.acr_repository
+}
+
+output "acr_login_server" {
+  value = azurerm_container_registry.acr.login_server
+}
+
+output "azure_resource_group" {
+  value = azurerm_resource_group.rg.name
+}
+
+output "azure_webapp_name" {
+  value = azurerm_linux_web_app.web.name
 }
