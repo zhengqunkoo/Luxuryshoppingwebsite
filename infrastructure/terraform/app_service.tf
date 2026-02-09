@@ -7,7 +7,7 @@ resource "azurerm_service_plan" "plan" {
 }
 
 resource "azurerm_linux_web_app" "web" {
-  name                = "app-oslp-prod-002"
+  name                = "app-oslp-prod-003"
   resource_group_name = azurerm_resource_group.rg.name
   location            = azurerm_service_plan.plan.location
   service_plan_id     = azurerm_service_plan.plan.id
@@ -18,7 +18,7 @@ resource "azurerm_linux_web_app" "web" {
     
     # Example container config - connects to the ACR created in main.tf
     application_stack {
-      docker_image     = "zhengqunkoo/Luxuryshoppingwebsite"
+      docker_image     = "${azurerm_container_registry.acr.login_server}/${var.acr_repository}"
       docker_image_tag = "latest"
     }
   }

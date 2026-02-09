@@ -1,6 +1,6 @@
 # Azure SQL Database
 resource "azurerm_mssql_server" "sql" {
-  name                         = "sql-oslp-prod-001"
+  name                         = "sql-oslp-prod-003"
   resource_group_name          = azurerm_resource_group.rg.name
   location                     = azurerm_resource_group.rg.location
   version                      = "12.0"
@@ -16,7 +16,7 @@ resource "azurerm_mssql_database" "db" {
 
 # Azure Key Vault
 resource "azurerm_key_vault" "kv" {
-  name                        = "kv-oslp-prod-001"
+  name                        = "kv-oslp-prod-003"
   location                    = azurerm_resource_group.rg.location
   resource_group_name         = azurerm_resource_group.rg.name
   tenant_id                   = data.azurerm_client_config.current.tenant_id

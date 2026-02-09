@@ -4,21 +4,14 @@ on:
   push:
     branches: ["main"]
 
+
 permissions:
   id-token: write
   contents: read
 
-env:
-  ACR_NAME: luxuryshoppingacr
-  ACR_REPOSITORY: luxury-shopping
-  ACR_LOGIN_SERVER: luxuryshoppingacr.azurecr.io
-  AZURE_RESOURCE_GROUP: LuxuryShoppingStudent
-  AZURE_WEBAPP_NAME: luxuryshoppingwebsite
-
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -27,6 +20,27 @@ jobs:
         uses: azure/login@v2
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        
+      - name: Terraform Init
+        run: terraform init
+        working-directory: infrastructure/terraform
+
+      - name: Terraform Apply
+        run: terraform apply -auto-approve
+        working-directory: infrastructure/terraform
+
+      - name: Get Terraform Outputs
+        id: tfoutputs
+        run: |
+          echo "ACR_NAME=$(terraform output -raw acr_name)" >> $GITHUB_ENV
+          echo "ACR_REPOSITORY=$(terraform output -raw acr_repository)" >> $GITHUB_ENV
+          echo "ACR_LOGIN_SERVER=$(terraform output -raw acr_login_server)" >> $GITHUB_ENV
+          echo "AZURE_RESOURCE_GROUP=$(terraform output -raw azure_resource_group)" >> $GITHUB_ENV
+          echo "AZURE_WEBAPP_NAME=$(terraform output -raw azure_webapp_name)" >> $GITHUB_ENV
+        working-directory: infrastructure/terraform
 
       - name: Login to ACR
         run: |
