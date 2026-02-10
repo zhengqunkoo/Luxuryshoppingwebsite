@@ -65,7 +65,7 @@ jobs:
         working-directory: infrastructure/terraform
 
       - name: Terraform Apply
-        run: terraform apply -auto-approve
+        run: terraform apply -refresh-only -auto-approve
         working-directory: infrastructure/terraform
 
       - name: Get Terraform Outputs
